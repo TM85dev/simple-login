@@ -1,0 +1,10 @@
+// create database //
+create database sign;
+
+// create table //
+create table users(
+	id int primary key not null,
+    name varchar(255) not null,
+    email text not null,
+    password varchar(255) not null
+);
