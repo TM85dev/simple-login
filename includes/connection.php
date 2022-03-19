@@ -1,13 +1,13 @@
 <?php
 
     class DB {
-        private $PDO;
+        protected $PDO;
         private $host = 'localhost';
         private $db = 'sign';
         private $username = 'root';
         private $password = '';
-        private $error = null;
-        private $res = '';
+        protected $error = null;
+        protected $res = '';
 
         function __construct() {
             try {

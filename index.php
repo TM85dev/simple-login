@@ -10,12 +10,14 @@
     <title>Document</title>
 </head>
 <body>
-    <?php 
-        $db = new User;
-        echo $db->response();
-        echo '<br>';
-        echo '<pre>';
-        echo $db->error();
+    <?php
+        $user = new User();
+        $user->register([
+            'name' => 'Tom',
+            'email' => 'drakk-kun@o2.pl',
+            'password' => '1z2x3c4v'
+        ]);
+        echo $user->error();
     ?>
 </body>
 </html>
