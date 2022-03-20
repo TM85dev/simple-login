@@ -13,7 +13,6 @@
             try {
                 $this->PDO = new PDO("mysql:host=$this->host;dbname=$this->db", $this->username, $this->password);
                 $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $this->res = 'connected';
             } catch(PDOException $e) {
                 $this->error = $e->getMessage();
             }

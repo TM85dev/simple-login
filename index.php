@@ -1,5 +1,7 @@
 <?php 
-    include 'includes/user.php';
+    session_start();
+    if(!isset($_SESSION['u_id'])) header('Location: ./login.php');
+    include 'includes/auth.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -10,14 +12,11 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-        $user = new User();
-        $user->register([
-            'name' => 'Tom',
-            'email' => 'drakk-kun@o2.pl',
-            'password' => '1z2x3c4v'
-        ]);
-        echo $user->error();
+    <?php 
+        print_r(Auth::user());
     ?>
+    <form action="./logout.php">
+        <button type="submit">Logout</button>
+    </form>
 </body>
 </html>
