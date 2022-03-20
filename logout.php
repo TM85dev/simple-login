@@ -1,4 +1,4 @@
 <?php
-    include 'includes/user.php';
+    include 'includes/autoloader.php';
     User::logout();
 ?>

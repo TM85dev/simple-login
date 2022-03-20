@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
-    include 'includes/user.php';
+    include 'includes/autoloader.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

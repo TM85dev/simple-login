@@ -1,5 +1,5 @@
 <?php
-    include 'connection.php';
+    include 'db.php';
 
     class User extends DB {
 
