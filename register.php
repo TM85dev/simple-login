@@ -25,7 +25,8 @@
             $user->register([
                 'name' => $_POST['name'],
                 'email' => $_POST['email'],
-                'password' => $_POST['password']
+                'password' => $_POST['password'],
+                'password2' => $_POST['password2']
             ]);
         ?>
         <?php if($user->error()): ?>

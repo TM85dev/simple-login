@@ -26,12 +26,7 @@
                 $this->error = 'Can\'t find user';
             }
         }
-        public static function logout() {
-            session_start();
-            session_destroy();
-            header('Location: ./login.php');
-        }
-        public function register($array) {
+        public function register(array $array) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $sql = "INSERT INTO users(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
                 $prepare = $this->PDO->prepare($sql);
@@ -54,7 +49,19 @@
         public function delete() {
 
         }
+        public function validateRegister(array $array) {
+            if(isset($array['name'])) $this->validateName($array['name']);
+            else $this->error = '';
+        }
+        private function validateName($name) {
+            if(strlen($name) < 3) $this->error = 'Name should be more than 3 characters';
+        }
+        private function validatePassword() {
 
+        }
+        private function validateEmail() {
+
+        }
     }
 
 ?>

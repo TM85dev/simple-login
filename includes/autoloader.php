@@ -3,9 +3,11 @@
     spl_autoload_register('autoload');
 
     function autoload($class) {
-        $path = "classes/".$class.".php";
-
-        include_once $path;
+        $pathModels = "app/Models/".$class.".php";
+        $pathControllers = "app/Controllers/".$class.".php";
+        if(file_exists($pathModels)) include_once $pathModels;
+        elseif(file_exists($pathControllers)) include_once $pathControllers;
+        
     }
 
 ?>
