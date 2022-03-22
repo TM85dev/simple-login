@@ -28,6 +28,7 @@
         }
         public function create(array $array) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
+                unset($array['password2']);
                 $sql = "INSERT INTO users(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
                 $prepare = $this->PDO->prepare($sql);
                 foreach ($array as $key => &$value) {

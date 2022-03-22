@@ -35,7 +35,7 @@
         <?php if(isset($response['error'])): ?>
             <p style="color:red"><?=$response['error']?></p>
         <?php elseif(isset($response['success'])): ?>
-            <p style="color:red"><?=$response['success']?></p>
+            <p style="color:green"><?=$response['success']?></p>
         <?php endif; ?>
     </div>
 <?php 
