@@ -21,23 +21,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>Register</title>
 </head>
-<body>
+<body class="register">
     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-        <input type="text" name="name">
+        <h2 class="title">Register</h2>
+        <label>Name</label>
+        <input type="text" name="name" autocomplete="off">
+        <label>Email</label>
         <input type="email" name="email">
+        <label>Password</label>
         <input type="password" name="password">
+        <label>Confirm</label>
         <input type="password" name="password2">
         <button type="submit">Register</button>
-    </form>
-    <div>
         <?php if(isset($response['error'])): ?>
-            <p style="color:red"><?=$response['error']?></p>
-        <?php elseif(isset($response['success'])): ?>
-            <p style="color:green"><?=$response['success']?></p>
-        <?php endif; ?>
-    </div>
+            <div class="error">
+                <p><?=$response['error']?></p>
+            </div>
+            <?php elseif(isset($response['success'])): ?>
+            <div class="success">
+                <p><?=$response['success']?></p>
+            </div>
+            <?php endif; ?>
+    </form>
 <?php 
 
 ?>
