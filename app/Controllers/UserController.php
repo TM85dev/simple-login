@@ -1,5 +1,5 @@
 <?php
-include_once 'includes/autoloader.php';
+include_once 'app/Models/User.php';
 
 class UserController {
     public function login() {
@@ -10,19 +10,14 @@ class UserController {
         session_destroy();
         header('Location: ./login.php');
     }
-    public function register($request) {
+    public function register(array $request) {
         $user = new User;
         $user->validateRegister($request);
         if($user->error()) {
-            return $user->error();
+            return ['error' => $user->error()];
         } else {
-            $user->create([
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'password2' => $request->password2
-            ]);
-            return $user->response();
+            $user->create($request);
+            return ['success' => $user->response()];
         }
     }
     public function delete() {

@@ -2,6 +2,18 @@
     session_start();
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    
+        $request = [
+            'name' => $_POST['name'],
+            'email' => $_POST['email'],
+            'password' => $_POST['password'],
+            'password2' => $_POST['password2']
+        ];
+    
+        $controller = new UserController();
+        $response = $controller->register($request);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,25 +28,18 @@
         <input type="text" name="name">
         <input type="email" name="email">
         <input type="password" name="password">
+        <input type="password" name="password2">
         <button type="submit">Register</button>
     </form>
-    <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
     <div>
-        <?php
-            $user = new User();
-            $user->register([
-                'name' => $_POST['name'],
-                'email' => $_POST['email'],
-                'password' => $_POST['password'],
-                'password2' => $_POST['password2']
-            ]);
-        ?>
-        <?php if($user->error()): ?>
-            <span style="color: red"><?=$user->error(); ?></span>
-        <?php else: ?>
-            <span style="color: green"><?=$user->response(); ?></span>
+        <?php if(isset($response['error'])): ?>
+            <p style="color:red"><?=$response['error']?></p>
+        <?php elseif(isset($response['success'])): ?>
+            <p style="color:red"><?=$response['success']?></p>
         <?php endif; ?>
     </div>
-    <?php endif; ?>
+<?php 
+
+?>
 </body>
 </html>
