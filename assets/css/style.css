@@ -1,4 +1,5 @@
-.register {
+.register,
+.login {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -12,7 +13,8 @@
   font-family: sans-serif;
 }
 
-.register form {
+.register form,
+.login form {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -34,20 +36,24 @@
   min-width: 300px;
 }
 
-.register form .title {
+.register form .title,
+.login form .title {
   font-size: 2.6em;
 }
 
-.register form label {
+.register form label,
+.login form label {
   font-size: 1.1em;
   color: grey;
 }
 
-.register form label:not(:first-of-type) {
+.register form label:not(:first-of-type),
+.login form label:not(:first-of-type) {
   margin-top: 16px;
 }
 
-.register form input {
+.register form input,
+.login form input {
   border: 1px solid lightgrey;
   -webkit-box-shadow: 1px 2px 6px 0 lightgrey;
           box-shadow: 1px 2px 6px 0 lightgrey;
@@ -55,11 +61,13 @@
   padding: 8px 6px 6px 6px;
 }
 
-.register form input:focus {
+.register form input:focus,
+.login form input:focus {
   border-bottom: 1px solid grey;
 }
 
-.register form button {
+.register form button,
+.login form button {
   font-size: 1.1em;
   margin-top: 30px;
   padding: 10px 60px;
@@ -71,24 +79,29 @@
   transition: background .2s ease-in-out;
 }
 
-.register form button:hover {
+.register form button:hover,
+.login form button:hover {
   background: #0376d4;
 }
 
-.register form .error {
+.register form .error,
+.login form .error {
   background: #ff7070;
   -webkit-box-shadow: 0 0 4px 4px #ff7070;
           box-shadow: 0 0 4px 4px #ff7070;
 }
 
-.register form .success {
+.register form .success,
+.login form .success {
   background: #5ec46e;
   -webkit-box-shadow: 0 0 4px 4px #5ec46e;
           box-shadow: 0 0 4px 4px #5ec46e;
 }
 
 .register form .error,
-.register form .success {
+.register form .success,
+.login form .error,
+.login form .success {
   width: 100%;
   margin-top: 30px;
   margin-bottom: -20px;
@@ -96,7 +109,9 @@
 }
 
 .register form .error p,
-.register form .success p {
+.register form .success p,
+.login form .error p,
+.login form .success p {
   color: white;
   text-align: center;
   font-size: 1.1em;
