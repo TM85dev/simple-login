@@ -2,14 +2,7 @@
 include_once 'app/Models/User.php';
 
 class UserController {
-    public function login() {
 
-    }
-    public function logout() {
-        session_start();
-        session_destroy();
-        header('Location: ./login.php');
-    }
     public function register(array $request) {
         $user = new User;
         $user->validateRegister($request);

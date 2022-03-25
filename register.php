@@ -40,7 +40,7 @@
             <div class="error">
                 <p><?=$response['error']?></p>
             </div>
-            <?php elseif(isset($response['success'])): ?>
+        <?php elseif(isset($response['success'])): ?>
             <div class="success">
                 <p><?=$response['success']?></p>
             </div>

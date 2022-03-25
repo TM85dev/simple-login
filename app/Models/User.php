@@ -1,30 +1,18 @@
 <?php
     include_once 'db.php';
 
-    class User extends DB {
+    class User {
+        protected $user;
+        protected $password = '';
+        protected $error = null;
+        protected $res = '';
+        protected $request;
 
-        public function login($request) {
+        public function get($request) {
             $request = (object) $request;
-            $sql = "SELECT * FROM users WHERE email=:email";
-            $prepare = $this->PDO->prepare($sql);
-            $email = htmlspecialchars($request->email);
-            $prepare->bindParam(':email', $email);
-            $prepare->execute();
-            $user = $prepare->fetch(PDO::FETCH_OBJ);
-            if($user) {
-                if($user->password == md5($request->password)) {
-                    $uid = uniqid();
-                    unset($user->password);
-                    $_SESSION['u_id'] = "$user->id|$uid";
-                    $_SESSION['auth'] = $user;
-                    $this->res = 'login success';
-                    header('Location: ./index.php');
-                } else {
-                    $this->error = 'Invalid password';
-                }
-            } else {
-                $this->error = 'Can\'t find user';
-            }
+            $db = new DB();
+            $this->user = $db->select('users')->where('email', $request->email)->get();
+            return $this->user;
         }
         public function create(array $array) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -50,6 +38,19 @@
         public function delete() {
 
         }
+        public function validateLogin($request) {
+            $request = (object) $request;
+            $user = $this->user;
+            if(!$user) {
+                $this->error = "Can't find user";
+            } else {
+                if($user->password === md5($request->password)) {
+                    $this->res = "You are successfully login";
+                } else {
+                    $this->error = 'Incorrect password';
+                }
+            }
+        }
         public function validateRegister(array $array) {
             if(isset($array['password']) && isset($array['password2'])) {
                 if(strlen($array['password']) < 7) $this->error = 'Password is too short'; 
@@ -64,6 +65,12 @@
             if(isset($array['name'])) {
                 if(strlen($array['name']) < 3) $this->error = 'Name too short';
             } else $this->error = 'Name is required';
+        }
+        public function error() {
+            return $this->error;
+        }
+        public function res() {
+            return $this->res;
         }
     }
 

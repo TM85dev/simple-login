@@ -1,7 +1,7 @@
 <?php
     include 'db.php';
 
-    class Auth extends DB {
+    class Auth {
 
         public static function user() {
             if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
@@ -13,6 +13,11 @@
                     return [];
                 }
             }
+        }
+        public static function logout() {
+            session_start();
+            session_destroy();
+            header('Location: ./login.php');
         }
     }
 

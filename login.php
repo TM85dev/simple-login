@@ -2,6 +2,14 @@
     session_start();
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $request = [
+            'email' => $_POST['email'],
+            'password' => $_POST['password']
+        ];
+        $controller = new AuthController();
+        $response = $controller->login($request);
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,23 +30,11 @@
             <div class="error">
                 <p><?=$response['error']?></p>
             </div>
-            <?php elseif(isset($response['success'])): ?>
+        <?php elseif(isset($response['success'])): ?>
             <div class="success">
                 <p><?=$response['success']?></p>
             </div>
         <?php endif; ?>
     </form>
-    <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-    <div>
-        <?php
-            $user = new User();
-            $user->login([
-                'email' => $_POST['email'],
-                'password' => $_POST['password']
-            ]);
-        ?>
-
-    </div>
-    <?php endif; ?>
 </body>
 </html>
