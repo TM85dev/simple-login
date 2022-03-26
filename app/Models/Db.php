@@ -7,6 +7,7 @@
         protected $row = '';
         protected $name = '';
         protected $table = '';
+        protected $insertData;
 
         private function conn() {
             $host = 'localhost';
@@ -18,6 +19,7 @@
                 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
                 $this->res = 'connected';
                 $this->conn = $conn;
+                return $this->conn;
             } catch(PDOException $e) {
                 $this->error = $e->getMessage();
             }
@@ -40,6 +42,26 @@
             $prepare->bindParam(":$this->row", $this->name);
             $prepare->execute();
             return $prepare->fetch(PDO::FETCH_OBJ);
+        }
+        public function insertInto($table) {
+            $this->select($table);
+            return $this;
+        }
+        public function values(array $array) {
+            $this->insertData = $array;
+            $sql = "INSERT INTO ".$this->table."(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
+            $this->conn = $this->conn->prepare($sql);
+            return $this;
+        }
+        public function set() {
+            $prepare = $this->conn;
+            foreach ($this->insertData as $key => &$value) {
+                $value = ($key === 'password') ? md5($value) : $value;
+                $value = htmlspecialchars($value);
+                $key = ":$key";
+                $prepare->bindParam($key, $value);
+            }
+            $prepare->execute();
         }
         public function response() {
             return ($this->error === null) ? $this->res : false;

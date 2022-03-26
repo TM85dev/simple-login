@@ -36,6 +36,7 @@
         <label>Confirm</label>
         <input type="password" name="password2">
         <button type="submit">Register</button>
+        <a href="./login.php" class="login-link">Login</a>
         <?php if(isset($response['error'])): ?>
             <div class="error">
                 <p><?=$response['error']?></p>

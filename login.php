@@ -26,6 +26,7 @@
         email: <input type="email" name="email"><br>
         password: <input type="password" name="password"><br>
         <button type="submit">Login</button>
+        <a href="./register.php" class="register-link">Register</a>
         <?php if(isset($response['error'])): ?>
             <div class="error">
                 <p><?=$response['error']?></p>

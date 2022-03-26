@@ -117,4 +117,9 @@
   font-size: 1.1em;
   margin: 10px 0;
 }
+
+.register-link,
+.login-link {
+  margin-top: 16px;
+}
 /*# sourceMappingURL=style.css.map */

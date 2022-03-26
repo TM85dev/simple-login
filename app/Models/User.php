@@ -16,17 +16,22 @@
         }
         public function create(array $array) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
+
                 unset($array['password2']);
-                $sql = "INSERT INTO users(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
-                $prepare = $this->PDO->prepare($sql);
-                foreach ($array as $key => &$value) {
-                    $value = ($key === 'password') ? md5($value) : $value;
-                    $value = htmlspecialchars($value);
-                    $key = ":$key";
-                    $prepare->bindParam($key, $value);
+                // $sql = "INSERT INTO users(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
+                // $prepare = $this->PDO->prepare($sql);
+                // foreach ($array as $key => &$value) {
+                //     $value = ($key === 'password') ? md5($value) : $value;
+                //     $value = htmlspecialchars($value);
+                //     $key = ":$key";
+                //     $prepare->bindParam($key, $value);
+                // }
+                // $prepare->execute();
+                $db = new DB;
+                $db->insertInto('users')->values($array)->set();
+                if(!$db->error()) {
+                    $this->res = "User was created";
                 }
-                $prepare->execute();
-                $this->res = "User was created";
             } else {
                 $this->error = 'Invalid request method';
             }
@@ -59,6 +64,9 @@
                 if(!preg_match("#[a-zA-Z]+#", $array['password'])) $this->error = 'Password must have at least 1 letter';
             } else $this->error = 'Passwords required';
             if(isset($array['email'])) {
+                $user = new DB();
+                $user = $user->select('users')->where('email', $array['email'])->get();
+                if($user) $this->error = 'Email has been taken';
                 if(strlen($array['email']) < 3) $this->error = 'Email too short';
                 if(!filter_var($array['email'], FILTER_VALIDATE_EMAIL)) $this->error = 'Invalid email';
             } else $this->error = 'Email required';
@@ -69,7 +77,7 @@
         public function error() {
             return $this->error;
         }
-        public function res() {
+        public function response() {
             return $this->res;
         }
     }
