@@ -11,24 +11,14 @@
         public function get($request) {
             $request = (object) $request;
             $db = new DB();
-            $this->user = $db->select('users')->where('email', $request->email)->get();
+            $this->user = $db->from('users')->where('email', $request->email)->get();
             return $this->user;
         }
         public function create(array $array) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-
                 unset($array['password2']);
-                // $sql = "INSERT INTO users(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
-                // $prepare = $this->PDO->prepare($sql);
-                // foreach ($array as $key => &$value) {
-                //     $value = ($key === 'password') ? md5($value) : $value;
-                //     $value = htmlspecialchars($value);
-                //     $key = ":$key";
-                //     $prepare->bindParam($key, $value);
-                // }
-                // $prepare->execute();
                 $db = new DB;
-                $db->insertInto('users')->values($array)->set();
+                $db->from('users')->insert($array)->set();
                 if(!$db->error()) {
                     $this->res = "User was created";
                 }
@@ -40,8 +30,12 @@
         public function edit() {
             
         }
-        public function delete() {
-
+        public function delete($request) {
+            $db = new DB;
+            $db->from('users')->delete(['email' => $request->email])->set();
+            if(!$db->error()) {
+                $this->res = "User was deleted";
+            }
         }
         public function validateLogin($request) {
             $request = (object) $request;
@@ -65,7 +59,7 @@
             } else $this->error = 'Passwords required';
             if(isset($array['email'])) {
                 $user = new DB();
-                $user = $user->select('users')->where('email', $array['email'])->get();
+                $user = $user->from('users')->where('email', $array['email'])->get();
                 if($user) $this->error = 'Email has been taken';
                 if(strlen($array['email']) < 3) $this->error = 'Email too short';
                 if(!filter_var($array['email'], FILTER_VALIDATE_EMAIL)) $this->error = 'Invalid email';
