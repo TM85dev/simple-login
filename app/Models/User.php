@@ -27,8 +27,9 @@
             }
 
         }
-        public function edit() {
-            
+        public function edit($request) {
+            $db = new DB;
+            $db->from('users')->update($request);
         }
         public function delete($request) {
             $db = new DB;

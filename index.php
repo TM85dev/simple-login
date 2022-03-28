@@ -17,26 +17,32 @@
     <?php 
         $auth = Auth::user();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $user = new User;
             if($_method == 'PATCH') {
-    
+                $user->edit([
+                    'id' => $auth->id,
+                    'old_email' => $auth->email,
+                    'name' => $_POST['name'],
+                    'email' => $_POST['email'],
+                    'password' => $_POST['password']
+                ]);    
             }
             if($_method == 'DELETE') {
-                $user = new User;
                 $user->delete($auth);
                 Auth::logout();
             }
         }
         ?>
     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
+        <input type="hidden" name="_method" value="PATCH">
         <label>
-            Name: <input type="text" value="<?=$auth->name?>">
+            Name: <input type="text" name="name" value="<?=$auth->name?>">
         </label>
         <label>
-            Email: <input type="email" value="<?=$auth->email?>">
+            Email: <input type="email" name="email" value="<?=$auth->email?>">
         </label>
         <label>
-            Password: <input type="text">
+            Password: <input type="text" name="password">
         </label>
         <button type="submit">Edit</button>
     </form>

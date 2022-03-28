@@ -59,6 +59,20 @@
             }
             $prepare->execute();
         }
+        public function update($request) {
+            $old_email = $request['old_email'];
+            unset($request['id'], $request['old_email']);
+            $this->data = $request;
+            $sets = '';
+            $i = 0;
+            foreach ($request as $key => $value) {
+                $sets .= (count($request)==$i || $i==0) ? "$key=:$key" : " , $key=:$key ";
+                $i++;
+            }
+            $sql = "UPDATE $this->table SET $sets WHERE email='$old_email'";
+            $this->conn = $this->conn->prepare($sql);
+            $this->set();
+        }
         public function delete($request) {
             $this->data = $request;
             $condition = '';
