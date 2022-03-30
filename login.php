@@ -23,8 +23,8 @@
 <body class="login">
     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
         <h2 class="title">Login</h2>
-        email: <input type="email" name="email"><br>
-        password: <input type="password" name="password"><br>
+        <input type="email" name="email" placeholder="email"><br>
+        <input type="password" name="password" placeholder="password"><br>
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
         <?php if(isset($response['error'])): ?>

@@ -33,7 +33,11 @@
             }
         }
         ?>
-    <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+    <div class="welcome-header">
+        Welcome <?=$auth->name ?>
+    </div>
+    <form  class="edit-form" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+        <div class="title">Edit profile</div>
         <input type="hidden" name="_method" value="PATCH">
         <label>
             Name: <input type="text" name="name" value="<?=$auth->name?>">
@@ -42,7 +46,10 @@
             Email: <input type="email" name="email" value="<?=$auth->email?>">
         </label>
         <label>
-            Password: <input type="text" name="password">
+            Old Password: <input type="text" name="old_password">
+        </label>
+        <label>
+            New Password: <input type="text" name="new_password">
         </label>
         <button type="submit">Edit</button>
     </form>

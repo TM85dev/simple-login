@@ -9,12 +9,12 @@
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  min-height: 70vh;
   font-family: sans-serif;
 }
 
 .register form,
 .login form {
+  background: #ffffff33;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -38,7 +38,18 @@
 
 .register form .title,
 .login form .title {
-  font-size: 2.6em;
+  background: #ffffff5c;
+  width: 100%;
+  margin: -20px -30px 50px -30px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 16px 30px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: #ffffffd6;
+  font-weight: 100;
+  -webkit-box-shadow: 0 4px 4px 0 #ffffff47;
+          box-shadow: 0 4px 4px 0 #ffffff47;
 }
 
 .register form label,
@@ -54,16 +65,38 @@
 
 .register form input,
 .login form input {
-  border: 1px solid lightgrey;
-  -webkit-box-shadow: 1px 2px 6px 0 lightgrey;
-          box-shadow: 1px 2px 6px 0 lightgrey;
+  background: #265fae36;
+  color: white;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
+  padding: 10px 14px;
   outline: none;
-  padding: 8px 6px 6px 6px;
 }
 
-.register form input:focus,
-.login form input:focus {
-  border-bottom: 1px solid grey;
+.register form input::-webkit-input-placeholder,
+.login form input::-webkit-input-placeholder {
+  color: #d599fade;
+  text-transform: uppercase;
+}
+
+.register form input:-ms-input-placeholder,
+.login form input:-ms-input-placeholder {
+  color: #d599fade;
+  text-transform: uppercase;
+}
+
+.register form input::-ms-input-placeholder,
+.login form input::-ms-input-placeholder {
+  color: #d599fade;
+  text-transform: uppercase;
+}
+
+.register form input::placeholder,
+.login form input::placeholder {
+  color: #d599fade;
+  text-transform: uppercase;
 }
 
 .register form button,
@@ -73,7 +106,11 @@
   padding: 10px 60px;
   border: 0;
   color: white;
-  background: #008cff;
+  background: #3e83f8d1;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
   cursor: pointer;
   -webkit-transition: background .2s ease-in-out;
   transition: background .2s ease-in-out;
@@ -86,16 +123,16 @@
 
 .register form .error,
 .login form .error {
-  background: #ff7070;
-  -webkit-box-shadow: 0 0 4px 4px #ff7070;
-          box-shadow: 0 0 4px 4px #ff7070;
+  background: #9600ff;
+  -webkit-box-shadow: 0 0 4px 4px #9600ff;
+          box-shadow: 0 0 4px 4px #9600ff;
 }
 
 .register form .success,
 .login form .success {
-  background: #5ec46e;
-  -webkit-box-shadow: 0 0 4px 4px #5ec46e;
-          box-shadow: 0 0 4px 4px #5ec46e;
+  background: #00b4ff;
+  -webkit-box-shadow: 0 0 4px 4px #00b4ff;
+          box-shadow: 0 0 4px 4px #00b4ff;
 }
 
 .register form .error,
@@ -121,5 +158,85 @@
 .register-link,
 .login-link {
   margin-top: 16px;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+body {
+  min-height: 100vh;
+  background-image: -webkit-gradient(linear, left bottom, right top, from(#ad6bd1), color-stop(#a06bd8), color-stop(#906bde), color-stop(#7c6ce5), color-stop(#636deb), color-stop(#4d7cf4), color-stop(#3289fb), color-stop(#0096ff), color-stop(#00afff), color-stop(#00c6ff), color-stop(#00dbff), to(#5feefb));
+  background-image: linear-gradient(to right top, #ad6bd1, #a06bd8, #906bde, #7c6ce5, #636deb, #4d7cf4, #3289fb, #0096ff, #00afff, #00c6ff, #00dbff, #5feefb);
+}
+
+.edit-form {
+  font-size: 1.1rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  max-width: 300px;
+  margin: 120px auto;
+  border: 1px solid #cecece;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  -webkit-box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+          box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  background-image: linear-gradient(155deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
+  border-radius: 15px;
+  border-top: 2px solid white;
+  border-left: 2px solid white;
+}
+
+.edit-form .title {
+  background: #f2f2f242;
+  padding: 10px 20px;
+  border-bottom: 1px solid #cecece;
+  color: grey;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.edit-form label {
+  margin: 5px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  color: grey;
+}
+
+.edit-form label input {
+  font-size: 1rem;
+  padding: 4px 6px;
+  outline: none;
+  color: grey;
+  border-radius: 4px;
+  margin: 0 10px;
+  background: #ffffffa8;
+  border: 0;
+}
+
+.edit-form button {
+  margin: 16px;
+  background: #00466657;
+  border: 0;
+  outline: 0;
+  padding: 10px;
+  color: white;
+  text-transform: uppercase;
+  border-radius: 6px;
 }
 /*# sourceMappingURL=style.css.map */

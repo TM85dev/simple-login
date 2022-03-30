@@ -27,14 +27,10 @@
 <body class="register">
     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
         <h2 class="title">Register</h2>
-        <label>Name</label>
-        <input type="text" name="name" autocomplete="off">
-        <label>Email</label>
-        <input type="email" name="email">
-        <label>Password</label>
-        <input type="password" name="password">
-        <label>Confirm</label>
-        <input type="password" name="password2">
+        <input type="text" name="name" autocomplete="off" placeholder="name"><br/>
+        <input type="email" name="email" placeholder="email"><br/>
+        <input type="password" name="password" placeholder="password"><br/>
+        <input type="password" name="password2" placeholder="confirm password">
         <button type="submit">Register</button>
         <a href="./login.php" class="login-link">Login</a>
         <?php if(isset($response['error'])): ?>
