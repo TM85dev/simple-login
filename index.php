@@ -34,25 +34,19 @@
         }
         ?>
     <div class="welcome-header">
-        Welcome <?=$auth->name ?>
+        Welcome <b><?=$auth->name ?></b>
     </div>
-    <form  class="edit-form" action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-        <div class="title">Edit profile</div>
-        <input type="hidden" name="_method" value="PATCH">
-        <label>
-            Name: <input type="text" name="name" value="<?=$auth->name?>">
-        </label>
-        <label>
-            Email: <input type="email" name="email" value="<?=$auth->email?>">
-        </label>
-        <label>
-            Old Password: <input type="text" name="old_password">
-        </label>
-        <label>
-            New Password: <input type="text" name="new_password">
-        </label>
-        <button type="submit">Edit</button>
-    </form>
+    <div class="edit-form">
+        <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+            <div class="title">Edit profile</div>
+            <input type="hidden" name="_method" value="PATCH">
+            <input type="text" name="name" value="<?=$auth->name?>" placeholder="name"><br/>
+            <input type="email" name="email" value="<?=$auth->email?>" placeholder="email"><br/>
+            <input type="text" name="old_password" placeholder="old password"><br/>
+            <input type="text" name="new_password" placeholder="new password">
+            <button type="submit">Edit</button>
+        </form>
+    </div>
     <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
         <input type="hidden" name="_method" value="DELETE">
         <button type="submit">Delete</button>

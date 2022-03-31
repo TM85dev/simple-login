@@ -2,13 +2,15 @@
     session_start();
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
+
+    $response = new AuthController();
+    
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $request = [
+        $request = (object) [
             'email' => $_POST['email'],
             'password' => $_POST['password']
         ];
-        $controller = new AuthController();
-        $response = $controller->login($request);
+        $response->login($request);
     }
 ?>
 <!DOCTYPE html>
@@ -27,13 +29,13 @@
         <input type="password" name="password" placeholder="password"><br>
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
-        <?php if(isset($response['error'])): ?>
+        <?php if($response->error()): ?>
             <div class="error">
-                <p><?=$response['error']?></p>
+                <p><?=$response->error(); ?></p>
             </div>
-        <?php elseif(isset($response['success'])): ?>
+        <?php elseif($response->response()): ?>
             <div class="success">
-                <p><?=$response['success']?></p>
+                <p><?=$response->response(); ?></p>
             </div>
         <?php endif; ?>
     </form>

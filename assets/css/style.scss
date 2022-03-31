@@ -1,90 +1,94 @@
-.register,
-.login {
+body {
+    min-height: 100vh;
+    background-image: linear-gradient(to right top, #ad6bd1, #a06bd8, #906bde, #7c6ce5, #636deb, #4d7cf4, #3289fb, #0096ff, #00afff, #00c6ff, #00dbff, #5feefb);
+    margin: 0;
+    font-family: sans-serif;
+}
+@mixin form {
+    background: #ffffff33;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: sans-serif;
-    form {
-        background: #ffffff33;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        box-shadow: 4px 2px 20px 1px lightgrey;
-        border: 1px solid lightgrey;
-        border-radius: 6px;
-        padding: 20px 30px 50px;
-        min-width: 300px;
-        .title {
-            background: #ffffff5c;
-            width: 100%;
-            margin: -20px -30px 50px -30px;
-            border-radius: 4px;
-            text-align: center;
-            padding: 16px 30px;
-            font-size: 1.4rem;
+    flex-direction: column;
+    box-shadow: 4px 2px 20px 1px lightgrey;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+    padding: 20px 30px 50px;
+    min-width: 300px;
+    margin-top:-10%;
+    .title {
+        background: #ffffff5c;
+        width: 100%;
+        margin: -20px -30px 50px -30px;
+        border-radius: 4px;
+        text-align: center;
+        padding: 16px 30px;
+        font-size: 1.4rem;
+        text-transform: uppercase;
+        color: #ffffffd6;
+        font-weight: 100;
+        box-shadow: 0 4px 4px 0 #ffffff47;
+    }
+    input {
+        background: #265fae36;
+        color: white;
+        box-shadow: inset 0px 0px 6px 0 #2b65ba;
+        border: 1px solid #00000033;
+        border-radius: 4px;
+        padding: 10px 14px;
+        outline: none;
+        &::placeholder {
+            color: #d599fade;
             text-transform: uppercase;
-            color: #ffffffd6;
-            font-weight: 100;
-            box-shadow: 0 4px 4px 0 #ffffff47;
         }
-        label {
-            font-size: 1.1em;
-            color: grey;
-            &:not(:first-of-type) {
-                margin-top:16px;
-            }
+    }
+    button {
+        font-size: 1.1em;
+        margin-top: 30px;
+        padding: 10px 60px;
+        border: 0;
+        color: rgb(255, 255, 255);
+        background: #3e83f8d1;
+        box-shadow: inset 0px 0px 6px 0 #2b65ba;
+        border: 1px solid #00000033;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background .2s ease-in-out;
+        &:hover {
+            background: rgb(3, 118, 212);
         }
-        input {
-            background: #265fae36;
+    }
+    .error {
+        background: #9600ff;
+        box-shadow: 0 0 4px 4px #9600ff;
+    }
+    .success {
+        background: #00b4ff;
+        box-shadow: 0 0 4px 4px #00b4ff;
+    }
+    .error,
+    .success {
+        width: 100%;
+        margin-top: 30px;
+        margin-bottom: -20px;
+        border-radius: 4px;
+        p {
             color: white;
-            box-shadow: inset 0px 0px 6px 0 #2b65ba;
-            border: 1px solid #00000033;
-            border-radius: 4px;
-            padding: 10px 14px;
-            outline: none;
-            &::placeholder {
-                color: #d599fade;
-                text-transform: uppercase;
-            }
-        }
-        button {
+            text-align: center;
             font-size: 1.1em;
-            margin-top: 30px;
-            padding: 10px 60px;
-            border: 0;
-            color: rgb(255, 255, 255);
-            background: #3e83f8d1;
-            box-shadow: inset 0px 0px 6px 0 #2b65ba;
-            border: 1px solid #00000033;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background .2s ease-in-out;
-            &:hover {
-                background: rgb(3, 118, 212);
-            }
+            margin: 10px 0;
         }
-        .error {
-            background: #9600ff;
-            box-shadow: 0 0 4px 4px #9600ff;
-        }
-        .success {
-            background: #00b4ff;
-            box-shadow: 0 0 4px 4px #00b4ff;
-        }
-        .error,
-        .success {
-            width: 100%;
-            margin-top: 30px;
-            margin-bottom: -20px;
-            border-radius: 4px;
-            p {
-                color: white;
-                text-align: center;
-                font-size: 1.1em;
-                margin: 10px 0;
-            }
-        }
+    }
+}
+.register,
+.login,
+.edit-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    form {
+        @include form();
     }
 }
 .register-link,
@@ -93,59 +97,11 @@
     color: #f2f2f2;
     text-decoration: none;
 }
-body {
-    min-height: 100vh;
-    background-image: linear-gradient(to right top, #ad6bd1, #a06bd8, #906bde, #7c6ce5, #636deb, #4d7cf4, #3289fb, #0096ff, #00afff, #00c6ff, #00dbff, #5feefb);
-}
-.edit-form {
-    font-size: 1.1rem;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    max-width: 300px;
-    margin: 120px auto;
-    border: 1px solid #cecece;
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter:blur(5px);
-    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
-    background-image: linear-gradient(155deg, rgba(255, 255, 255, 0.72), rgba(255, 255, 255, 0));
-    border-radius: 15px;
-    border-top: 2px solid rgba( 255, 255, 255, 1 );
-    border-left: 2px solid rgba( 255, 255, 255, 1 );
-    .title {
-        background: #f2f2f242;
-        padding: 10px 20px;
-        border-bottom: 1px solid #cecece;
-        color: grey;
-        text-transform: uppercase;
-        text-align: center;
-        margin-bottom: 10px;
-    }
-    label {
-        margin: 5px 20px;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        color: grey;
-        input {
-            font-size: 1rem;
-            padding: 4px 6px;
-            outline: none;
-            color: grey;
-            border-radius: 4px;
-            margin: 0 10px;
-            background: #ffffffa8;
-            border: 0;
-        }
-    }
-    button {
-        margin: 16px;
-        background: #00466657;
-        border: 0;
-        outline: 0;
-        padding: 10px;
-        color: white;
-        text-transform: uppercase;
-        border-radius: 6px;
-    }
+.welcome-header {
+    font-size: 1.4rem;
+    background: #ffffffcf;
+    margin: 0;
+    padding: 0 20px;
+    box-shadow: 0 4px 5px #8b8b8ba3;
+    line-height: 3rem;
 }

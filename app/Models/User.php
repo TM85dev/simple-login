@@ -3,15 +3,15 @@
 
     class User {
         protected $user;
-        protected $password = '';
+        private $password = '';
         protected $error = null;
-        protected $res = '';
+        protected $res = null;
         protected $request;
 
-        public function get($request) {
-            $request = (object) $request;
+        public function get(object $request) {
             $db = new DB();
             $this->user = $db->from('users')->where('email', $request->email)->get();
+            $this->password = md5($request->password);
             return $this->user;
         }
         public function create(array $array) {
@@ -38,13 +38,12 @@
                 $this->res = "User was deleted";
             }
         }
-        public function validateLogin($request) {
-            $request = (object) $request;
+        public function validateLogin() {
             $user = $this->user;
             if(!$user) {
                 $this->error = "Can't find user";
             } else {
-                if($user->password === md5($request->password)) {
+                if($user->password === $this->password) {
                     $this->res = "You are successfully login";
                 } else {
                     $this->error = 'Incorrect password';
@@ -70,10 +69,10 @@
             } else $this->error = 'Name is required';
         }
         public function error() {
-            return $this->error;
+            return $this->error ? $this->error : false;
         }
         public function response() {
-            return $this->res;
+            return $this->res ? $this->res : false;
         }
     }
 

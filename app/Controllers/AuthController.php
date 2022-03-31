@@ -2,21 +2,18 @@
 
 include_once 'app/Models/User.php';
 
-class AuthController {
+class AuthController extends User {
     
-    public function login(array $request) {
-        $user = new User();
-        $auth = $user->get($request);
-        $user->validateLogin($request);
-        if($user->error()) {
-            return ['error' => $user->error()];
-        } else {
+    public function login(object $request) {
+        $auth = $this->get($request);
+        $this->validateLogin();
+        if(!$this->error()) {
             session_start();
             $_SESSION['u_id'] = $auth->id.'|'.uniqid();
             $_SESSION['auth'] = $auth;
             header('Location: ./index.php');
-            return ['success' => $user->res()];
         }
+        return $this;
     }
 
 }
