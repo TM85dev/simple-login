@@ -1,21 +1,22 @@
 <?php
-include_once 'app/Models/User.php';
+include_once 'includes/autoloader.php';
 
 class UserController {
+    use Responses;
 
-    public function register(array $request) {
+    public function register(object $request) {
         $user = new User;
         $user->validateRegister($request);
-        if($user->error()) {
-            return ['error' => $user->error()];
-        } else {
+        if(!$user->error()) {
             $user->create($request);
-            return ['success' => $user->response()];
-        }
+            $this->res = $user->response();
+        } else $this->error = $user->error();
+        return $this;
     }
     public function delete() {
 
     }
+
 }
 
 ?>

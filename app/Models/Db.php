@@ -24,12 +24,12 @@
                 $this->error = $e->getMessage();
             }
         }
-        public function from($table) {
+        public function from(string $table) {
             $this->conn();
             $this->table = $table;
             return $this;
         }
-        public function where($row, $name) {
+        public function where(string $row, string $name) {
             $this->row = $row;
             $this->name = $name;
             $sql = "SELECT * FROM $this->table WHERE $row=:$row";
@@ -43,9 +43,9 @@
             $prepare->execute();
             return $prepare->fetch(PDO::FETCH_OBJ);
         }
-        public function insert(array $array) {
-            $this->data = $array;
-            $sql = "INSERT INTO ".$this->table."(".implode(',', array_keys($array)).") VALUES (:".implode(",:", array_keys($array)).");";
+        public function insert(object $request) {
+            $this->data = $request;
+            $sql = "INSERT INTO ".$this->table."(".implode(',', array_keys((array) $request)).") VALUES (:".implode(",:", array_keys((array) $request)).");";
             $this->conn = $this->conn->prepare($sql);
             return $this;
         }

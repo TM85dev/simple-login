@@ -2,16 +2,18 @@
     session_start();
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
+
+    $controller = new UserController();
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
     
-        $request = [
+        $request = (object) [
             'name' => $_POST['name'],
             'email' => $_POST['email'],
             'password' => $_POST['password'],
             'password2' => $_POST['password2']
         ];
-    
-        $controller = new UserController();
+
         $response = $controller->register($request);
     }
 ?>
@@ -33,14 +35,16 @@
         <input type="password" name="password2" placeholder="confirm password">
         <button type="submit">Register</button>
         <a href="./login.php" class="login-link">Login</a>
-        <?php if(isset($response['error'])): ?>
+        <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+        <?php if( $response->error() ): ?>
             <div class="error">
-                <p><?=$response['error']?></p>
+                <p><?=$response->error(); ?></p>
             </div>
-        <?php elseif(isset($response['success'])): ?>
+        <?php elseif( $response->response() ): ?>
             <div class="success">
-                <p><?=$response['success']?></p>
+                <p><?=$response->response(); ?></p>
             </div>
+        <?php endif; ?>
         <?php endif; ?>
     </form>
 <?php 

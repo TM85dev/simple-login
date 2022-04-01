@@ -14,11 +14,11 @@
             $this->password = md5($request->password);
             return $this->user;
         }
-        public function create(array $array) {
+        public function create(object $request) {
             if($_SERVER['REQUEST_METHOD'] == 'POST') {
-                unset($array['password2']);
+                unset($request->password2);
                 $db = new DB;
-                $db->from('users')->insert($array)->set();
+                $db->from('users')->insert($request)->set();
                 if(!$db->error()) {
                     $this->res = "User was created";
                 }
@@ -31,7 +31,7 @@
             $db = new DB;
             $db->from('users')->update($request);
         }
-        public function delete($request) {
+        public function remove($request) {
             $db = new DB;
             $db->from('users')->delete(['email' => $request->email])->set();
             if(!$db->error()) {
@@ -50,22 +50,22 @@
                 }
             }
         }
-        public function validateRegister(array $array) {
-            if(isset($array['password']) && isset($array['password2'])) {
-                if(strlen($array['password']) < 7) $this->error = 'Password is too short'; 
-                if($array['password'] !== $array['password2']) $this->error = 'Passwords are not the same';
-                if(!preg_match("#[0-9]+#", $array['password'])) $this->error = 'Password must have at least 1 number';
-                if(!preg_match("#[a-zA-Z]+#", $array['password'])) $this->error = 'Password must have at least 1 letter';
+        public function validateRegister(object $request) {
+            if(isset($request->password) && isset($request->password2)) {
+                if(strlen($request->password) < 7) $this->error = 'Password is too short'; 
+                if($request->password !== $request->password2) $this->error = 'Passwords are not the same';
+                if(!preg_match("#[0-9]+#", $request->password)) $this->error = 'Password must have at least 1 number';
+                if(!preg_match("#[a-zA-Z]+#", $request->password)) $this->error = 'Password must have at least 1 letter';
             } else $this->error = 'Passwords required';
-            if(isset($array['email'])) {
+            if(isset($request->email)) {
                 $user = new DB();
-                $user = $user->from('users')->where('email', $array['email'])->get();
+                $user = $user->from('users')->where('email', $request->email)->get();
                 if($user) $this->error = 'Email has been taken';
-                if(strlen($array['email']) < 3) $this->error = 'Email too short';
-                if(!filter_var($array['email'], FILTER_VALIDATE_EMAIL)) $this->error = 'Invalid email';
+                if(strlen($request->email) < 3) $this->error = 'Email too short';
+                if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)) $this->error = 'Invalid email';
             } else $this->error = 'Email required';
-            if(isset($array['name'])) {
-                if(strlen($array['name']) < 3) $this->error = 'Name too short';
+            if(isset($request->name)) {
+                if(strlen($request->name) < 3) $this->error = 'Name too short';
             } else $this->error = 'Name is required';
         }
         public function error() {

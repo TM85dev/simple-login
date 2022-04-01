@@ -29,11 +29,11 @@
         <input type="password" name="password" placeholder="password"><br>
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
-        <?php if($response->error()): ?>
+        <?php if( $response->error() ): ?>
             <div class="error">
                 <p><?=$response->error(); ?></p>
             </div>
-        <?php elseif($response->response()): ?>
+        <?php elseif( $response->response() ): ?>
             <div class="success">
                 <p><?=$response->response(); ?></p>
             </div>
