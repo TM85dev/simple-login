@@ -1,4 +1,4 @@
 <?php
     include 'includes/autoloader.php';
-    Auth::logout();
+    if($_SERVER['REQUEST_METHOD'] == 'POST') Auth::logout();
 ?>
