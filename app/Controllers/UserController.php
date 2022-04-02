@@ -2,7 +2,7 @@
 include_once 'includes/autoloader.php';
 
 class UserController {
-    use Responses;
+    use TraitRes;
 
     public function register(object $request) {
         $user = new User;

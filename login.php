@@ -3,14 +3,14 @@
     if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
 
-    $response = new AuthController();
+    $controller = new AuthController();
     
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $request = (object) [
             'email' => $_POST['email'],
             'password' => $_POST['password']
         ];
-        $response->login($request);
+        $response = $controller->login($request);
     }
 ?>
 <!DOCTYPE html>
@@ -29,14 +29,16 @@
         <input type="password" name="password" placeholder="password"><br>
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
-        <?php if( $response->error() ): ?>
-            <div class="error">
-                <p><?=$response->error(); ?></p>
-            </div>
-        <?php elseif( $response->response() ): ?>
-            <div class="success">
-                <p><?=$response->response(); ?></p>
-            </div>
+        <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
+            <?php if( $response->error() ): ?>
+                <div class="error">
+                    <p><?=$response->error(); ?></p>
+                </div>
+            <?php elseif( $response->response() ): ?>
+                <div class="success">
+                    <p><?=$response->response(); ?></p>
+                </div>
+            <?php endif; ?>
         <?php endif; ?>
     </form>
 </body>

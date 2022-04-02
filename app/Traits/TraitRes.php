@@ -1,6 +1,6 @@
 <?php
 
-trait Responses {
+trait TraitRes {
     private $error = false;
     private $res = false;
 

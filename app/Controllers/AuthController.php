@@ -1,13 +1,18 @@
 <?php
 
-include_once 'app/Models/User.php';
+include_once 'includes/autoloader.php';
 
-class AuthController extends User {
+class AuthController {
+    use TraitRes;
     
     public function login(object $request) {
-        $auth = $this->get($request);
-        $this->validateLogin();
-        if(!$this->error()) {
+        $user = new User;
+        $auth = $user->get($request);
+        $user->validateLogin();
+        if($user->error()) {
+            $this->error = $user->error();
+        } else {
+            $this->res = $user->response();
             session_start();
             $_SESSION['u_id'] = $auth->id.'|'.uniqid();
             $_SESSION['auth'] = $auth;
