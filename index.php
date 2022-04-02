@@ -1,7 +1,7 @@
 <?php 
     session_start();
     if(!isset($_SESSION['u_id'])) header('Location: ./login.php');
-    include 'includes/autoloader.php';
+    include_once 'includes/autoloader.php';
     if($_SERVER['REQUEST_METHOD'] == 'POST') $_method = $_POST['_method'];
 ?>
 <!DOCTYPE html>
@@ -16,6 +16,7 @@
 <body>
     <?php 
         $auth = Auth::user();
+        $api = new AuthController;
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = new User;
             if($_method == 'PUT') {
@@ -28,8 +29,7 @@
                 ]);    
             }
             if($_method == 'DELETE') {
-                $user->delete($auth);
-                Auth::logout();
+                
             }
         }
         ?>
@@ -37,12 +37,15 @@
         <div>
             Welcome <b><?=$auth->name ?></b>
         </div>
+        <?php if( $api->response() ): ?>
+            <div><?=$api->response(); unset($_SESSION['login_info']); ?></div>
+        <?php endif; ?>
         <div>
             <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
                 <input type="hidden" name="_method" value="DELETE">
                 <button class="delete-btn" type="submit">Delete</button>
             </form>
-            <form action="./logout.php">
+            <form action="./logout.php" method="POST">
                 <button class="logout-btn" type="submit">Logout</button>
             </form>
         </div>

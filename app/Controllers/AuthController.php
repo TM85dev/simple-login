@@ -16,9 +16,17 @@ class AuthController {
             session_start();
             $_SESSION['u_id'] = $auth->id.'|'.uniqid();
             $_SESSION['auth'] = $auth;
+            $_SESSION['login_info'] = 'Successfully login';
             header('Location: ./index.php');
         }
         return $this;
     }
+    public function edit() {
 
+    }
+    public function logout() {
+        Auth::logout();
+        $_SESSION['logout_info'] = 'Successfully logout';
+        header('Location: ./login.php');
+    }
 }

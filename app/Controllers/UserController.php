@@ -13,8 +13,16 @@ class UserController {
         } else $this->error = $user->error();
         return $this;
     }
-    public function delete() {
-
+    public function delete(object $request) {
+        $user = new User;
+        $user->get($request);
+        $user->validateLogin();
+        if($user->error()) {
+            $this->error = $user->error();
+        } else {
+            $this->res = $user->response();
+        }
+        Auth::logout($user);
     }
 
 }

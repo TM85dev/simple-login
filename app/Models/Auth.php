@@ -1,5 +1,5 @@
 <?php
-    include 'db.php';
+    include_once 'includes/autoloader.php';
 
     class Auth {
 
@@ -17,8 +17,7 @@
         }
         public static function logout() {
             session_start();
-            session_destroy();
-            header('Location: ./login.php');
+            unset($_SESSION['u_id'], $_SESSION['auth']);
         }
     }
 
