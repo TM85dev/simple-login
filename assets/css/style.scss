@@ -43,20 +43,7 @@ body {
         }
     }
     button {
-        font-size: 1.1em;
-        margin-top: 30px;
-        padding: 10px 60px;
-        border: 0;
-        color: rgb(255, 255, 255);
-        background: #3e83f8d1;
-        box-shadow: inset 0px 0px 6px 0 #2b65ba;
-        border: 1px solid #00000033;
-        border-radius: 4px;
-        cursor: pointer;
-        transition: background .2s ease-in-out;
-        &:hover {
-            background: rgb(3, 118, 212);
-        }
+        @include btn(1.1em, 30px 0 0, 10px 60px, #3e83f8d1, rgb(3, 118, 212));
     }
     .error {
         background: #9600ff;
@@ -78,6 +65,22 @@ body {
             font-size: 1.1em;
             margin: 10px 0;
         }
+    }
+}
+@mixin btn($fontSize, $margin, $padding, $bg, $bgHover) {
+    font-size: $fontSize;
+    padding: $padding;
+    margin: $margin;
+    border: 0;
+    color: white;
+    background: $bg;
+    box-shadow: inset 0px 0px 6px 0 #2b65ba;
+    border: 1px solid #00000033;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background .2s ease-in-out;
+    &:hover {
+        background: $bgHover;
     }
 }
 .register,
@@ -104,4 +107,16 @@ body {
     padding: 0 20px;
     box-shadow: 0 4px 5px #8b8b8ba3;
     line-height: 3rem;
+    display: Flex;
+    justify-content: space-between;
+    &>div:last-of-type {
+        display: flex;
+    }
+}
+.delete-btn {
+    @include btn(.76em, 0 10px, 5px 40px, #e91e63, #d50d51);
+    box-shadow: inset 0px 0px 6px 0 #a56bd6;
+}
+.logout-btn {
+    @include btn(.76em, 0 10px, 5px 40px, #a46bd6, #8c51c0);
 }

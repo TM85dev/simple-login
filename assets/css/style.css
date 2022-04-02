@@ -109,8 +109,8 @@ body {
 .login form button,
 .edit-form form button {
   font-size: 1.1em;
-  margin-top: 30px;
   padding: 10px 60px;
+  margin: 30px 0 0;
   border: 0;
   color: white;
   background: #3e83f8d1;
@@ -184,5 +184,57 @@ body {
   -webkit-box-shadow: 0 4px 5px #8b8b8ba3;
           box-shadow: 0 4px 5px #8b8b8ba3;
   line-height: 3rem;
+  display: Flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.welcome-header > div:last-of-type {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.delete-btn {
+  font-size: 0.76em;
+  padding: 5px 40px;
+  margin: 0 10px;
+  border: 0;
+  color: white;
+  background: #e91e63;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: background .2s ease-in-out;
+  transition: background .2s ease-in-out;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #a56bd6;
+          box-shadow: inset 0px 0px 6px 0 #a56bd6;
+}
+
+.delete-btn:hover {
+  background: #d50d51;
+}
+
+.logout-btn {
+  font-size: 0.76em;
+  padding: 5px 40px;
+  margin: 0 10px;
+  border: 0;
+  color: white;
+  background: #a46bd6;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: background .2s ease-in-out;
+  transition: background .2s ease-in-out;
+}
+
+.logout-btn:hover {
+  background: #8c51c0;
 }
 /*# sourceMappingURL=style.css.map */

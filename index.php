@@ -18,7 +18,7 @@
         $auth = Auth::user();
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
             $user = new User;
-            if($_method == 'PATCH') {
+            if($_method == 'PUT') {
                 $user->edit([
                     'id' => $auth->id,
                     'old_email' => $auth->email,
@@ -34,12 +34,23 @@
         }
         ?>
     <div class="welcome-header">
-        Welcome <b><?=$auth->name ?></b>
+        <div>
+            Welcome <b><?=$auth->name ?></b>
+        </div>
+        <div>
+            <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+                <input type="hidden" name="_method" value="DELETE">
+                <button class="delete-btn" type="submit">Delete</button>
+            </form>
+            <form action="./logout.php">
+                <button class="logout-btn" type="submit">Logout</button>
+            </form>
+        </div>
     </div>
     <div class="edit-form">
         <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
             <div class="title">Edit profile</div>
-            <input type="hidden" name="_method" value="PATCH">
+            <input type="hidden" name="_method" value="PUT">
             <input type="text" name="name" value="<?=$auth->name?>" placeholder="name"><br/>
             <input type="email" name="email" value="<?=$auth->email?>" placeholder="email"><br/>
             <input type="text" name="old_password" placeholder="old password"><br/>
@@ -47,12 +58,5 @@
             <button type="submit">Edit</button>
         </form>
     </div>
-    <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <button type="submit">Delete</button>
-    </form>
-    <form action="./logout.php">
-        <button type="submit">Logout</button>
-    </form>
 </body>
 </html>
