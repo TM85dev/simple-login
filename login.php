@@ -1,9 +1,8 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
-
-    $api = new AuthController();
+    Session::start();
+    Session::isAuth('index.php');
+    $api = new AuthController;
     
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         $request = (object) [
@@ -36,7 +35,7 @@
                 </div>
             <?php elseif( $api->response() ): ?>
                 <div class="success">
-                    <p><?=$api->response(); unset($_SESSION['logout_info']); ?></p>
+                    <p><?=$api->response(); unset($_SESSION['action_info']); ?></p>
                 </div>
             <?php endif; ?>
 

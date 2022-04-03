@@ -120,3 +120,8 @@ body {
 .logout-btn {
     @include btn(.76em, 0 10px, 5px 40px, #a46bd6, #8c51c0);
 }
+.success-login {
+    font-size: .8em;
+    color: #1fbd6e;
+    font-weight: 600;
+}

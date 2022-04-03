@@ -1,8 +1,9 @@
 <?php 
-    session_start();
-    if(!isset($_SESSION['u_id'])) header('Location: ./login.php');
     include_once 'includes/autoloader.php';
+    Session::start();
+    Session::isNotAuth('login.php');
     if($_SERVER['REQUEST_METHOD'] == 'POST') $_method = $_POST['_method'];
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,7 +39,7 @@
             Welcome <b><?=$auth->name ?></b>
         </div>
         <?php if( $api->response() ): ?>
-            <div><?=$api->response(); unset($_SESSION['login_info']); ?></div>
+            <div class="success-login"><?=$api->response(); Session::remove('action_info'); ?></div>
         <?php endif; ?>
         <div>
             <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">

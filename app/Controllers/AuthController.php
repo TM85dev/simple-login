@@ -4,6 +4,10 @@ include_once 'includes/autoloader.php';
 
 class AuthController {
     use TraitRes;
+
+    public function __construct() {
+        Session::start();
+    }
     
     public function login(object $request) {
         $user = new User;
@@ -12,11 +16,9 @@ class AuthController {
         if($user->error()) {
             $this->error = $user->error();
         } else {
-            $this->res = $user->response();
-            session_start();
             $_SESSION['u_id'] = $auth->id.'|'.uniqid();
             $_SESSION['auth'] = $auth;
-            $_SESSION['login_info'] = 'Successfully login';
+            $_SESSION['action_info'] = 'Successfully login';
             header('Location: ./index.php');
         }
         return $this;
@@ -26,7 +28,7 @@ class AuthController {
     }
     public function logout() {
         Auth::logout();
-        $_SESSION['logout_info'] = 'Successfully logout';
+        $_SESSION['action_info'] = 'Successfully logout';
         header('Location: ./login.php');
     }
 }

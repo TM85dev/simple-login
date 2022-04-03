@@ -3,6 +3,10 @@
 
     class Auth {
 
+        public function __construct() {
+            Session::start();
+        }
+
         public static function user() {
             if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
                 $user_id = strval(explode('|', $_SESSION['u_id'])[0]);
@@ -16,8 +20,9 @@
             }
         }
         public static function logout() {
-            session_start();
-            unset($_SESSION['u_id'], $_SESSION['auth']);
+            Session::remove([
+                'u_id', 'auth'
+            ]);
         }
     }
 

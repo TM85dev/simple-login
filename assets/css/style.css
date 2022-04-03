@@ -237,4 +237,10 @@ body {
 .logout-btn:hover {
   background: #8c51c0;
 }
+
+.success-login {
+  font-size: .8em;
+  color: #1fbd6e;
+  font-weight: 600;
+}
 /*# sourceMappingURL=style.css.map */

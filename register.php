@@ -1,8 +1,7 @@
 <?php 
-    session_start();
-    if(isset($_SESSION['u_id'])) header('Location: ./index.php');
     include 'includes/autoloader.php';
-
+    Session::start();
+    Session::isAuth('index.php');
     $controller = new UserController();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {

@@ -6,8 +6,7 @@ trait TraitRes {
 
     public function __construct() {
         if(session_status() == PHP_SESSION_NONE) session_start();
-        if(isset($_SESSION['login_info'])) $this->res = 'Successfully login';
-        if(isset($_SESSION['logout_info'])) $this->res = 'Successfully logout';
+        $this->res = isset($_SESSION['action_info']) ? $_SESSION['action_info'] : false;
     }
 
     public function response() {
