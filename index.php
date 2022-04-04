@@ -3,7 +3,6 @@
     Session::start();
     Session::isNotAuth('login.php');
     if($_SERVER['REQUEST_METHOD'] == 'POST') $_method = $_POST['_method'];
-    
 ?>
 <!DOCTYPE html>
 <html lang="en">

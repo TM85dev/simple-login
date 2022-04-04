@@ -6,7 +6,6 @@
         public function __construct() {
             Session::start();
         }
-
         public static function user() {
             if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
                 $user_id = strval(explode('|', $_SESSION['u_id'])[0]);
@@ -18,6 +17,10 @@
                     return [];
                 }
             }
+        }
+        public static function login(object $auth) {
+            $_SESSION['u_id'] = $auth->id.'|'.uniqid();
+            $_SESSION['auth'] = $auth;
         }
         public static function logout() {
             Session::remove([
