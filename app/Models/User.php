@@ -1,5 +1,10 @@
 <?php
-    include_once 'db.php';
+
+    namespace app\Models;
+
+    use app\Models\DB;
+
+    // include_once 'db.php';
 
     class User {
         protected $user;

@@ -1,5 +1,8 @@
 <?php
-    include_once 'includes/autoloader.php';
+
+    namespace app\Models;
+
+    // include_once 'includes/autoloader.php';
 
     class Auth {
 

@@ -1,6 +1,12 @@
 <?php
 
-include_once 'includes/autoloader.php';
+namespace app\Controllers;
+
+use app\Traits\TraitRes as TraitRes;
+use app\Models\User as User;
+use app\Models\Auth as Auth;
+
+// include_once 'includes/autoloader.php';
 
 class AuthController {
     use TraitRes;

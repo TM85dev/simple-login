@@ -1,5 +1,7 @@
 <?php
 
+namespace app\Traits;
+
 trait TraitRes {
     private $error = false;
     private $res = false;

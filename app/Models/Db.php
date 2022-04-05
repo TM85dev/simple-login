@@ -1,5 +1,9 @@
 <?php
 
+    namespace app\Models;
+
+    use PDO;
+
     class DB {
         protected $conn;
         protected $error = null;

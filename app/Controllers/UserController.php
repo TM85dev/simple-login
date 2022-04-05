@@ -1,5 +1,8 @@
 <?php
-include_once 'includes/autoloader.php';
+
+namespace app\Controllers;
+
+// include_once 'includes/autoloader.php';
 
 class UserController {
     use TraitRes;
