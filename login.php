@@ -1,8 +1,8 @@
 <?php 
     include 'includes/autoloader.php';
 
-    use app\Models\Session as Session;
-    use app\Controllers\AuthController as AuthController;
+    use app\Models\Session;
+    use app\Controllers\AuthController;
 
     Session::start();
     Session::isAuth('index.php');

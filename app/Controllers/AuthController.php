@@ -2,9 +2,9 @@
 
 namespace app\Controllers;
 
-use app\Traits\TraitRes as TraitRes;
-use app\Models\User as User;
-use app\Models\Auth as Auth;
+use app\Traits\TraitRes;
+use app\Models\User;
+use app\Models\Auth;
 
 // include_once 'includes/autoloader.php';
 

@@ -1,8 +1,15 @@
 <?php 
-    // include_once 'includes/autoloader.php';
+    include_once 'includes/autoloader.php';
+
+    use app\Models\Session;
+    use app\Models\Auth;
+    use app\Controllers\AuthController;
     
     Session::start();
     Session::isNotAuth('login.php');
+
+    $auth = Auth::user();
+    $api = new AuthController;
     
 ?>
 <!DOCTYPE html>
@@ -15,11 +22,6 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
-    <?php 
-        $auth = Auth::user();
-        $api = new AuthController;
-
-    ?>
     <div class="welcome-header">
         <div>
             Welcome <b><?=$auth->name ?></b>
@@ -38,7 +40,7 @@
         </div>
     </div>
     <div class="edit-form">
-        <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+        <form action="routes/users/edit.php" method="POST">
             <div class="title">Edit profile</div>
             <input type="hidden" name="_method" value="PUT">
             <input type="text" name="name" value="<?=$auth->name?>" placeholder="name"><br/>

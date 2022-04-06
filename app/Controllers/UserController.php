@@ -2,6 +2,10 @@
 
 namespace app\Controllers;
 
+use app\Models\User;
+use app\Models\Auth;
+use app\Traits\TraitRes;
+
 // include_once 'includes/autoloader.php';
 
 class UserController {

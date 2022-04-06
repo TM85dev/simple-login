@@ -1,11 +1,15 @@
 <?php 
     include 'includes/autoloader.php';
+
+    use app\Models\Session;
+    use app\Controllers\UserController;
+
     Session::start();
     Session::isAuth('index.php');
-    $controller = new UserController();
+
+    $api = new UserController();
 
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
         $request = (object) [
             'name' => $_POST['name'],
             'email' => $_POST['email'],
@@ -13,7 +17,7 @@
             'password2' => $_POST['password2']
         ];
 
-        $response = $controller->register($request);
+        $api->register($request);
     }
 ?>
 <!DOCTYPE html>
@@ -34,20 +38,15 @@
         <input type="password" name="password2" placeholder="confirm password">
         <button type="submit">Register</button>
         <a href="./login.php" class="login-link">Login</a>
-        <?php if($_SERVER['REQUEST_METHOD'] == 'POST'): ?>
-        <?php if( $response->error() ): ?>
+        <?php if( $api->error() ): ?>
             <div class="error">
-                <p><?=$response->error(); ?></p>
+                <p><?=$api->error(); ?></p>
             </div>
-        <?php elseif( $response->response() ): ?>
+        <?php elseif( $api->response() ): ?>
             <div class="success">
-                <p><?=$response->response(); ?></p>
+                <p><?=$api->response(); ?></p>
             </div>
-        <?php endif; ?>
         <?php endif; ?>
     </form>
-<?php 
-
-?>
 </body>
 </html>
