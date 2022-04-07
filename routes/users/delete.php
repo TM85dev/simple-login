@@ -3,6 +3,8 @@
 require_once '../../includes/autoloader.php';
 
 use app\Models\Session;
+use app\Models\Auth;
+use app\Controllers\UserController;
 
 Session::start();
 Session::isNotAuth('login.php');

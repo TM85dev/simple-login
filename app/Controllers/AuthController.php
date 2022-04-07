@@ -6,7 +6,6 @@ use app\Traits\TraitRes;
 use app\Models\User;
 use app\Models\Auth;
 
-// include_once 'includes/autoloader.php';
 
 class AuthController {
     use TraitRes;

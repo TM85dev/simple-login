@@ -29,9 +29,12 @@
         <?php if( $api->response() ): ?>
             <div class="success-login"><?=$api->response(); Session::remove('action_info'); ?></div>
         <?php endif; ?>
-        <div>
-            <form action="routes/users/delete.php" method="POST">
+        <div class="left-menu-actions">
+            <button id="toggleDelete" class="delete-btn">Delete</button>
+            <form class="toggle-delete" action="routes/users/delete.php" method="POST">
+                <div class="close">x</div>
                 <input type="hidden" name="_method" value="DELETE">
+                <input type="text" name="password" placeholder="confirm password" autocomplete="off">
                 <button class="delete-btn" type="submit">Delete</button>
             </form>
             <form action="./logout.php" method="POST">
@@ -50,5 +53,6 @@
             <button type="submit">Edit</button>
         </form>
     </div>
+    <script src="assets/js/script.js"></script>
 </body>
 </html>

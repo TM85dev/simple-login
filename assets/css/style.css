@@ -196,10 +196,14 @@ body {
   display: flex;
 }
 
+.welcome-header .left-menu-actions {
+  position: relative;
+}
+
 .delete-btn {
   font-size: 0.76em;
   padding: 5px 40px;
-  margin: 0 10px;
+  margin: 10px;
   border: 0;
   color: white;
   background: #e91e63;
@@ -238,9 +242,103 @@ body {
   background: #8c51c0;
 }
 
+.toggle-delete {
+  position: absolute;
+  display: none;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 110%;
+  right: 0px;
+  background: #ffffff9e;
+  padding: 20px 20px 10px;
+  -webkit-box-shadow: 4px 2px 20px 1px lightgrey;
+          box-shadow: 4px 2px 20px 1px lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  opacity: 0;
+  -webkit-transition: opacity 0.3s ease-in-out;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.toggle-delete .delete-btn {
+  font-size: 0.76em;
+  padding: 5px 30px;
+  margin: 10px;
+  border: 0;
+  color: white;
+  background: #e91e63;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-transition: background .2s ease-in-out;
+  transition: background .2s ease-in-out;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #a56bd6;
+          box-shadow: inset 0px 0px 6px 0 #a56bd6;
+}
+
+.toggle-delete .delete-btn:hover {
+  background: #d50d51;
+}
+
+.toggle-delete input {
+  background: #265fae36;
+  color: white;
+  -webkit-box-shadow: inset 0px 0px 6px 0 #2b65ba;
+          box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid #00000033;
+  border-radius: 4px;
+  padding: 10px 14px;
+  outline: none;
+}
+
+.toggle-delete input::-webkit-input-placeholder {
+  color: #ffffffde;
+  text-transform: uppercase;
+}
+
+.toggle-delete input:-ms-input-placeholder {
+  color: #ffffffde;
+  text-transform: uppercase;
+}
+
+.toggle-delete input::-ms-input-placeholder {
+  color: #ffffffde;
+  text-transform: uppercase;
+}
+
+.toggle-delete input::placeholder {
+  color: #ffffffde;
+  text-transform: uppercase;
+}
+
+.toggle-delete.show {
+  opacity: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
 .success-login {
   font-size: .8em;
   color: #1fbd6e;
   font-weight: 600;
+}
+
+.close {
+  position: absolute;
+  top: -12px;
+  right: 13px;
+  color: black;
+  cursor: pointer;
+  font-family: cursive;
+  -webkit-transition: color 0.2s;
+  transition: color 0.2s;
+}
+
+.close:hover {
+  color: red;
 }
 /*# sourceMappingURL=style.css.map */
