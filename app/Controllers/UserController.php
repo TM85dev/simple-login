@@ -24,16 +24,15 @@ class UserController {
         $user = new User;
         $user->get($request);
         $user->validateRemove();
-        $_SESSION['action_error'] = $user->error();
-        // $_SESSION['action_info'] = $user->response();
-        // if($user->error()) {
-        //     $this->error = $user->error();
-        //     $_SESSION['action_error'] = $user->error();
-        // } else {
-        //     $this->res = $user->response();
-        //     $_SESSION['action_info'] = $user->response();
-        //     Auth::logout($user);
-        // }
+        if($user->error()) {
+            $this->error = $user->error();
+            $_SESSION['action_error'] = $user->error();
+        } else {
+            $this->res = $user->response();
+            $_SESSION['action_info'] = $user->response();
+            Auth::logout($user);
+            $user->remove($request);
+        }
         header('Location: /sign/');
         exit;
     }

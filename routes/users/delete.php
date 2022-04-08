@@ -12,8 +12,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['_method'] == 'DELETE') {
     $api = new UserController;
     $auth = Auth::user();
     $data = (object) [
-        // 'email' => $auth->email,
-        // 'password' => $_POST['confirm_password']
+        'email' => $auth->email,
+        'password' => $_POST['confirm_password']
     ];
     $api->delete($data);
 }

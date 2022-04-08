@@ -44,9 +44,6 @@ class User {
     public function remove(object $request) {
         $db = new DB;
         $db->from('users')->delete(['email' => $request->email])->set();
-        if(!$db->error()) {
-            $this->res = "User was deleted";
-        }
     }
     public function validateLogin() {
         $user = $this->user;
@@ -62,26 +59,21 @@ class User {
     }
     public function validateRemove() {
         $user = $this->user;
-        if(!isset($user->password) || !isset($user->email)) {
-            $this->error = 'User or password not found';
+        if(!isset($user->email)) {
+            $this->error = 'User not found';
+        } else {
+            if(!isset($user->password)) {
+                $this->error = 'Password required';
+            } else {
+                $db = new DB;
+                $password = $db->from('users')->where('email', $user->email)->get()->password;
+                if($this->password !== $password) {
+                    $this->error = 'Incorrect password';
+                } else {
+                    $this->res = 'Successfully removed from database';
+                }
+            }
         }
-        // if(!$user) {
-        //     $this->error = "Can't find user";
-        // } else {
-        //     if(!isset($user->email)) {
-        //         $this->error = "Email required";
-        //     }
-        //     if(!isset($user->password)) {
-        //         $this->error = "Confirm password required";
-        //     } else {
-        //         if($user->password === $this->password) {
-        //             $this->res = 'User deleted';
-        //         } else {
-        //             $this->error ='Incorrect password';
-        //         }
-        //     }
-        // }
-        return $this;
     }
     public function validateRegister(object $request) {
         if(isset($request->password) && isset($request->password2)) {

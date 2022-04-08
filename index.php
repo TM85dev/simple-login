@@ -24,7 +24,7 @@
 <body>
     <div class="welcome-header">
         <div>
-            Welcome <b><?=$auth->name; print_r($_SESSION) ?></b>
+            Welcome <b><?=$auth->name; ?></b>
         </div>
         <?php if( $api->response() ): ?>
             <div class="success-login"><?=$api->response(); ?></div>
