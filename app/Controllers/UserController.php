@@ -23,13 +23,19 @@ class UserController {
     public function delete(object $request) {
         $user = new User;
         $user->get($request);
-        $user->validateLogin();
-        if($user->error()) {
-            $this->error = $user->error();
-        } else {
-            $this->res = $user->response();
-        }
-        Auth::logout($user);
+        $user->validateRemove();
+        $_SESSION['action_error'] = $user->error();
+        // $_SESSION['action_info'] = $user->response();
+        // if($user->error()) {
+        //     $this->error = $user->error();
+        //     $_SESSION['action_error'] = $user->error();
+        // } else {
+        //     $this->res = $user->response();
+        //     $_SESSION['action_info'] = $user->response();
+        //     Auth::logout($user);
+        // }
+        header('Location: /sign/');
+        exit;
     }
 
 }

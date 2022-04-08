@@ -24,18 +24,25 @@
 <body>
     <div class="welcome-header">
         <div>
-            Welcome <b><?=$auth->name ?></b>
+            Welcome <b><?=$auth->name; print_r($_SESSION) ?></b>
         </div>
         <?php if( $api->response() ): ?>
-            <div class="success-login"><?=$api->response(); Session::remove('action_info'); ?></div>
+            <div class="success-login"><?=$api->response(); ?></div>
         <?php endif; ?>
         <div class="left-menu-actions">
             <button id="toggleDelete" class="delete-btn">Delete</button>
             <form class="toggle-delete" action="routes/users/delete.php" method="POST">
                 <div class="close">x</div>
                 <input type="hidden" name="_method" value="DELETE">
-                <input type="text" name="password" placeholder="confirm password" autocomplete="off">
-                <button class="delete-btn" type="submit">Delete</button>
+                <div class="password-row">
+                    <input type="text" name="confirm_password" placeholder="confirm password" autocomplete="off">
+                    <button class="delete-btn" type="submit">Delete</button>
+                </div>
+                <?php if( isset($_SESSION['action_error']) ): ?>
+                    <div class="error">
+                        <p><?=$_SESSION['action_error']; ?></p>
+                    </div>
+                <?php endif; ?>
             </form>
             <form action="./logout.php" method="POST">
                 <button class="logout-btn" type="submit">Logout</button>
@@ -53,6 +60,7 @@
             <button type="submit">Edit</button>
         </form>
     </div>
+    <?php Session::remove(['action_info', 'action_error']); ?>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

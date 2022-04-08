@@ -319,6 +319,34 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.toggle-delete .password-row {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.toggle-delete .error {
+  -webkit-box-shadow: 0 0 4px 4px #9600ff;
+          box-shadow: 0 0 4px 4px #9600ff;
+  background: #9600ff;
+  width: 100%;
+  margin-top: 18px;
+  border-radius: 4px;
+}
+
+.toggle-delete .error > p {
+  margin: 8px 0;
+  font-size: 0.76em;
+  color: white;
+  text-align: center;
+  line-height: .9em;
 }
 
 .success-login {

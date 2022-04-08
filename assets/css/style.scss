@@ -149,6 +149,25 @@ body {
     &.show {
         opacity: 1;
         display: flex;
+        flex-wrap: wrap;
+    }
+    .password-row {
+        display: flex;
+        align-items: center;
+    }
+    .error {
+        box-shadow: 0 0 4px 4px #9600ff;
+        background: #9600ff;
+        width: 100%;
+        margin-top: 18px;
+        border-radius: 4px;
+        &>p {
+            margin: 8px 0;
+            font-size: 0.76em;
+            color: white;
+            text-align: center;
+            line-height: .9em;
+        }
     }
 }
 .success-login {
@@ -168,3 +187,4 @@ body {
         color: red;
     }
 }
+

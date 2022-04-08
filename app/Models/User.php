@@ -17,10 +17,12 @@ class User {
     protected $request;
 
     public function get(object $request) {
-        $db = new DB;
-        $this->user = $db->from('users')->where('email', $request->email)->get();
-        $this->password = md5($request->password);
-        return $this->user;
+        if(isset($request->email) && isset($request->password)) {
+            $db = new DB;
+            $this->user = $db->from('users')->where('email', $request->email)->get();
+            $this->password = isset($request->password) ? md5($request->password) : $this->password;
+            return $this->user;
+        }
     }
     public function create(object $request) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -39,7 +41,7 @@ class User {
         $db = new DB;
         $db->from('users')->update($request);
     }
-    public function remove($request) {
+    public function remove(object $request) {
         $db = new DB;
         $db->from('users')->delete(['email' => $request->email])->set();
         if(!$db->error()) {
@@ -57,6 +59,29 @@ class User {
                 $this->error = 'Incorrect password';
             }
         }
+    }
+    public function validateRemove() {
+        $user = $this->user;
+        if(!isset($user->password) || !isset($user->email)) {
+            $this->error = 'User or password not found';
+        }
+        // if(!$user) {
+        //     $this->error = "Can't find user";
+        // } else {
+        //     if(!isset($user->email)) {
+        //         $this->error = "Email required";
+        //     }
+        //     if(!isset($user->password)) {
+        //         $this->error = "Confirm password required";
+        //     } else {
+        //         if($user->password === $this->password) {
+        //             $this->res = 'User deleted';
+        //         } else {
+        //             $this->error ='Incorrect password';
+        //         }
+        //     }
+        // }
+        return $this;
     }
     public function validateRegister(object $request) {
         if(isset($request->password) && isset($request->password2)) {
