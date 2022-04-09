@@ -17,12 +17,11 @@ class User {
     protected $request;
 
     public function get(object $request) {
-        if(isset($request->email) && isset($request->password)) {
-            $db = new DB;
-            $this->user = $db->from('users')->where('email', $request->email)->get();
-            $this->password = isset($request->password) ? md5($request->password) : $this->password;
-            return $this->user;
-        }
+        $db = new DB;
+        $email = isset($request->email) ? $request->email : '';
+        $this->user = $db->from('users')->where('email', $email)->get();
+        $this->password = isset($request->password) ? md5($request->password) : $this->password;
+        return $this->user;
     }
     public function create(object $request) {
         if($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,13 +36,21 @@ class User {
         }
 
     }
-    public function edit($request) {
+    public function edit(object $request) {
         $db = new DB;
         $db->from('users')->update($request);
     }
     public function remove(object $request) {
         $db = new DB;
         $db->from('users')->delete(['email' => $request->email])->set();
+    }
+    public function validateEdit() {
+        $user = $this->user;
+        if(!$user) {
+            $this->error = 'Can\'t find user';
+        } else {
+            $this->error = 'User found';
+        }
     }
     public function validateLogin() {
         $user = $this->user;

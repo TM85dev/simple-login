@@ -36,6 +36,22 @@ class UserController {
         header('Location: /sign/');
         exit;
     }
+    public function edit(object $request) {
+        $user = new User;
+        $data = (object) ['email' => $request->old_email];
+        $user->get($data);
+        $user->validateEdit();
+        if($user->error()) {
+            $this->error = $user->error();
+            $_SESSION['action_error'] = $user->error();
+        } else {
+            $this->res = $user->response();
+            $_SESSION['action_info'] = $user->response();
+            $user->edit($request);
+        }
+        header('Location: /sign/');
+        exit;
+    }
 
 }
 

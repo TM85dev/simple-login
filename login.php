@@ -39,10 +39,11 @@
                 </div>
             <?php elseif( $api->response() ): ?>
                 <div class="success">
-                    <p><?=$api->response(); unset($_SESSION['action_info']); ?></p>
+                    <p><?=$api->response(); ?></p>
                 </div>
             <?php endif; ?>
 
     </form>
+    <?php Session::remove(['action_info', 'action_error']); ?>
 </body>
 </html>

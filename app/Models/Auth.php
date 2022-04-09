@@ -8,10 +8,8 @@ use app\Models\Session;
 
 class Auth {
 
-    public function __construct() {
-        Session::start();
-    }
     public static function user() {
+        Session::start();
         if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
             $user_id = strval(explode('|', $_SESSION['u_id'])[0]);
             $auth_id = strval($_SESSION['auth']->id);
@@ -24,6 +22,7 @@ class Auth {
         }
     }
     public static function login(object $auth) {
+        Session::start();
         $_SESSION['u_id'] = $auth->id.'|'.uniqid();
         $_SESSION['auth'] = $auth;
     }

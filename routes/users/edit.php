@@ -1,12 +1,18 @@
 <?php
 
+require_once '../../includes/autoloader.php';
+
+use app\Controllers\UserController;
+use app\Models\Auth;
+
 if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['_method'] == 'PUT') {
-    $user = new User;
-    $user->edit([
-        'id' => $auth->id,
+    $auth = Auth::user();
+    $api = new UserController;
+    $request = (object) [
         'old_email' => $auth->email,
         'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'password' => $_POST['password']
-    ]);    
+        'new_email' => $_POST['email'],
+        'new_password' => $_POST['new_password']
+    ];
+    $api->edit($request);   
 }

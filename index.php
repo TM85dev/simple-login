@@ -58,6 +58,15 @@
             <input type="text" name="old_password" placeholder="old password"><br/>
             <input type="text" name="new_password" placeholder="new password">
             <button type="submit">Edit</button>
+            <?php if( $api->error() ): ?>
+                <div class="error">
+                    <p><?=$api->error(); ?></p>
+                </div>
+            <?php elseif( $api->response() ): ?>
+                <div class="success">
+                    <p><?=$api->response(); ?></p>
+                </div>
+            <?php endif; ?>
         </form>
     </div>
     <?php Session::remove(['action_info', 'action_error']); ?>
