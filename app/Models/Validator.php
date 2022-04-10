@@ -9,9 +9,12 @@ class Validator {
     use TraitRes;
 
     private $data = [];
+    private $password = null;
+    private $comparing_passwords = false;
 
     public function __construct(object $obj) {
         $this->data = $obj;
+        if(isset($obj->password) && isset($obj->confirm_password)) $this->comparing_passwords = true;
     }
 
     public function validate(object $obj) {
@@ -36,13 +39,20 @@ class Validator {
                 if(strlen($value) > $num) $this->error = "max <b>$name</b> length $num required";
             }
             if($req === 'email') {
-                if(!filter_var($request->email, FILTER_VALIDATE_EMAIL)) $this->error = "<b>$name</b> is not valid";
+                if(!filter_var($value, FILTER_VALIDATE_EMAIL)) $this->error = "<b>$name</b> is not valid";
             }
             if($req === 'password') {
-                if(!preg_match("#[0-9]+#", $value)) $this->error = "<b>$name</b> required min 1 number";
-                if(!preg_match("#[A-Z]+#", $value)) $this->error = "<b>$name</b> required min 1 uppercase";
-                if(!preg_match("#[a-z]+#", $value)) $this->error = "<b>$name</b> required min 1 lowercase";
-                if(!preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $value)) $this->error = "<b>$name</b> required min 1 special";
+                if(!$this->comparing_passwords) {
+                    if(!preg_match("#[0-9]+#", $value)) $this->error = "<b>$name</b> required min 1 number";
+                    if(!preg_match("#[A-Z]+#", $value)) $this->error = "<b>$name</b> required min 1 uppercase";
+                    if(!preg_match("#[a-z]+#", $value)) $this->error = "<b>$name</b> required min 1 lowercase";
+                    if(!preg_match('/[\'\/~`\!@#\$%\^&\*\(\)_\-\+=\{\}\[\]\|;:"\<\>,\.\?\\\]/', $value)) $this->error = "<b>$name</b> required min 1 special";
+                }
+                $this->password = $value;
+            }
+            if($req === 'confirm_password') {
+                if(!$this->password) $this->error = "<b>password</b> is required";
+                if($this->password !== $value) $this->error = "<b>confirm password</b> and <b>password</b> are not the same"; 
             }
         }
         // if(in_array('required', $req)) {

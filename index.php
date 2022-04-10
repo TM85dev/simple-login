@@ -4,12 +4,14 @@
     use app\Models\Session;
     use app\Models\Auth;
     use app\Controllers\AuthController;
+    use app\Controllers\UserController;
     
     Session::start();
     Session::isNotAuth('login.php');
 
     $auth = Auth::user();
     $api = new AuthController;
+    $api_user = new UserController;
     
 ?>
 <!DOCTYPE html>
@@ -38,9 +40,9 @@
                     <input type="text" name="confirm_password" placeholder="confirm password" autocomplete="off">
                     <button class="delete-btn" type="submit">Delete</button>
                 </div>
-                <?php if( isset($_SESSION['action_error']) ): ?>
+                <?php if( $api_user->error() ): ?>
                     <div class="error">
-                        <p><?=$_SESSION['action_error']; ?></p>
+                        <p><?=$api_user->error(); ?></p>
                     </div>
                 <?php endif; ?>
             </form>

@@ -14,7 +14,7 @@
             'name' => $_POST['name'],
             'email' => $_POST['email'],
             'password' => $_POST['password'],
-            'password2' => $_POST['password2']
+            'confirm_password' => $_POST['confirm_password']
         ];
 
         $api->register($request);
@@ -35,7 +35,7 @@
         <input type="text" name="name" autocomplete="off" placeholder="name"><br/>
         <input type="email" name="email" placeholder="email"><br/>
         <input type="password" name="password" placeholder="password"><br/>
-        <input type="password" name="password2" placeholder="confirm password">
+        <input type="password" name="confirm_password" placeholder="confirm password">
         <button type="submit">Register</button>
         <a href="./login.php" class="login-link">Login</a>
         <?php if( $api->error() ): ?>

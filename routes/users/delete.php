@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['_method'] == 'DELETE') {
     $auth = Auth::user();
     $data = (object) [
         'email' => $auth->email,
-        'password' => $_POST['confirm_password']
+        'confirm_password' => $_POST['confirm_password']
     ];
     $api->delete($data);
 }

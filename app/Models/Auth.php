@@ -2,11 +2,14 @@
 
 namespace app\Models;
 
+use app\Models\User;
 use app\Models\Session;
+use app\Traits\TraitRes;
 
 // include_once 'includes/autoloader.php';
 
 class Auth {
+    use TraitRes;
 
     public static function user() {
         Session::start();
@@ -23,8 +26,17 @@ class Auth {
     }
     public static function login(object $auth) {
         Session::start();
-        $_SESSION['u_id'] = $auth->id.'|'.uniqid();
-        $_SESSION['auth'] = $auth;
+        $user = new User;
+        $user = $user->get($auth);
+        if($user->password === md5($auth->password)) {
+            unset($user->password);
+            $_SESSION['u_id'] = $user->id.'|'.uniqid();
+            $_SESSION['auth'] = $user;
+        } else {
+            return (object) [
+                'error' => 'Invalid password'
+            ];
+        }
     }
     public static function logout() {
         Session::remove([

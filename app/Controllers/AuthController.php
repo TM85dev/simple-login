@@ -5,27 +5,34 @@ namespace app\Controllers;
 use app\Traits\TraitRes;
 use app\Models\User;
 use app\Models\Auth;
+use app\Models\Validator;
 
 
 class AuthController {
     use TraitRes;
     
     public function login(object $request) {
-        $user = new User;
-        $auth = $user->get($request);
-        $user->validateLogin();
-        if($user->error()) {
-            $this->error = $user->error();
+        $validator = new Validator((object) [
+            'email' => 'required|email',
+            'password' => 'required|password'
+        ]);
+        $data = (object) [
+            'email' => $request->email,
+            'password' => $request->password
+        ];
+        $validator->validate($data);
+        if($validator->error()) {
+            $this->error = $validator->error();
         } else {
-            Auth::login($auth);
-            $_SESSION['action_info'] = 'Successfully login';
-            header('Location: ./index.php');
-            exit;
+            $auth = Auth::login($data);
+            if($auth->error) {
+                $this->error = $auth->error;
+            } else {
+                $_SESSION['action_info'] = 'Successfully login';
+                header('Location: ./index.php');
+                exit;
+            }
         }
-        return $this;
-    }
-    public function edit() {
-
     }
     public function logout() {
         Auth::logout();
