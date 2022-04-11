@@ -4,14 +4,12 @@
     use app\Models\Session;
     use app\Models\Auth;
     use app\Controllers\AuthController;
-    use app\Controllers\UserController;
     
     Session::start();
     Session::isNotAuth('login.php');
 
     $auth = Auth::user();
     $api = new AuthController;
-    $api_user = new UserController;
     
 ?>
 <!DOCTYPE html>
@@ -40,9 +38,9 @@
                     <input type="text" name="confirm_password" placeholder="confirm password" autocomplete="off">
                     <button class="delete-btn" type="submit">Delete</button>
                 </div>
-                <?php if( $api_user->error() ): ?>
+                <?php if( isset($_SESSION['delete_error']) ): ?>
                     <div class="error">
-                        <p><?=$api_user->error(); ?></p>
+                        <p><?=$_SESSION['delete_error']; ?></p>
                     </div>
                 <?php endif; ?>
             </form>
@@ -60,18 +58,18 @@
             <input type="text" name="old_password" placeholder="old password"><br/>
             <input type="text" name="new_password" placeholder="new password">
             <button type="submit">Edit</button>
-            <?php if( $api->error() ): ?>
+            <?php if( isset($_SESSION['action_error']) ): ?>
                 <div class="error">
-                    <p><?=$api->error(); ?></p>
+                    <p><?=$_SESSION['action_error'] ?></p>
                 </div>
-            <?php elseif( $api->response() ): ?>
+            <?php elseif( isset($_SESSION['action_info']) ): ?>
                 <div class="success">
-                    <p><?=$api->response(); ?></p>
+                    <p><?=$_SESSION['action_info']; ?></p>
                 </div>
             <?php endif; ?>
         </form>
     </div>
-    <?php Session::remove(['action_info', 'action_error']); ?>
+    <?php Session::remove(['action_info', 'action_error', 'delete_error']); ?>
     <script src="assets/js/script.js"></script>
 </body>
 </html>

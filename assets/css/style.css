@@ -332,6 +332,10 @@ body {
           align-items: center;
 }
 
+.toggle-delete .password-row input {
+  -webkit-text-security: disc;
+}
+
 .toggle-delete .error {
   -webkit-box-shadow: 0 0 4px 4px #9600ff;
           box-shadow: 0 0 4px 4px #9600ff;

@@ -10,9 +10,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST' && $_POST['_method'] == 'PUT') {
     $api = new UserController;
     $request = (object) [
         'old_email' => $auth->email,
-        'name' => $_POST['name'],
+        'old_password' => $_POST['old_password'],
+        'new_name' => $_POST['name'],
         'new_email' => $_POST['email'],
-        'new_password' => $_POST['new_password']
+        'new_password' => $_POST['new_password'],
     ];
     $api->edit($request);   
 }

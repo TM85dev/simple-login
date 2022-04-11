@@ -23,6 +23,9 @@ trait TraitRes {
         if(isset($_SESSION['action_error'])) {
             unset($_SESSION['action_info']);
             $this->error = $_SESSION['action_error'];
+        } else if(isset($_SESSION['delete_error'])) {
+            unset($_SESSION['delete_error']);
+            $this->error = $_SESSION['delete_error'];
         }
         return $this->error;
     }

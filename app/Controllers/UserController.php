@@ -53,7 +53,7 @@ class UserController {
         ];
         $validator->validate($data);
         if($validator->error()) {
-            $_SESSION['action_error'] = $validator->error();
+            $_SESSION['delete_error'] = $validator->error();
         } 
         else {
             Auth::logout($user);
@@ -65,17 +65,49 @@ class UserController {
     }
     public function edit(object $request) {
         $user = new User;
-        $data = (object) ['email' => $request->old_email];
-        $user->get($data);
-        $user->validateEdit();
-        if($user->error()) {
-            $this->error = $user->error();
-            $_SESSION['action_error'] = $user->error();
+        $data = (object) [
+            'email' => $request->old_email,
+        ];
+        $password = $user->get($data)->password;
+        $validator = new Validator((object) [
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'password' => 'required|password',
+            'confirm_password' => 'required|confirm_password'
+        ]);
+        $data = (object) [
+            'name' => $request->new_name,
+            'email' => $request->new_email,
+            'password' => $password,
+            'confirm_password' => md5($request->old_password)
+        ];
+        $validator->validate($data);
+        if($validator->error()) {
+            $_SESSION['action_error'] = $validator->error();
         } else {
-            $this->res = $user->response();
-            $_SESSION['action_info'] = $user->response();
-            $user->edit($request);
+            $data = (object) [
+                'old_email' => $request->old_email,
+                'new_name' => $request->new_name,
+                'new_email' => $request->new_email,
+                'new_password' => $request->new_password
+            ];
+            $user->edit($data);
+            $_SESSION['action_info'] = 'User data updated';
+            $_SESSION['auth']->name = $request->new_name;
+            $_SESSION['auth']->email = $request->new_email;
         }
+        // $user = new User;
+        // $data = (object) ['email' => $request->old_email];
+        // $user->get($data);
+        // $user->validateEdit();
+        // if($user->error()) {
+        //     $this->error = $user->error();
+        //     $_SESSION['action_error'] = $user->error();
+        // } else {
+        //     $this->res = $user->response();
+        //     $_SESSION['action_info'] = $user->response();
+        //     $user->edit($request);
+        // }
         header('Location: /sign/');
         exit;
     }

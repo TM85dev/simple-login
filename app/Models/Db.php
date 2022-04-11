@@ -9,8 +9,6 @@ class DB {
     use TraitRes;
 
     protected $conn;
-    // protected $error = null;
-    // protected $res = '';
     protected $row = '';
     protected $name = '';
     protected $table = '';
@@ -66,12 +64,13 @@ class DB {
         }
         $prepare->execute();
     }
-    public function update($request) {
-        $old_email = $request['old_email'];
-        unset($request['id'], $request['old_email']);
+    public function update(object $request) {
+        $old_email = $request->old_email;
+        unset($request->old_email);
         $this->data = $request;
         $sets = '';
         $i = 0;
+        $request = (array) $request;
         foreach ($request as $key => $value) {
             $sets .= (count($request)==$i || $i==0) ? "$key=:$key" : " , $key=:$key ";
             $i++;
@@ -93,15 +92,6 @@ class DB {
         return $this;
 
     }
-    // public function response() {
-    //     return ($this->error === null) ? $this->res : false;
-    // }
-    // public function error() {
-    //     return $this->error;
-    // }
-    // function __destruct() {
-    //     $this->conn = null;
-    // }
 }
 
 ?>

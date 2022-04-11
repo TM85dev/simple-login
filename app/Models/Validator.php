@@ -55,12 +55,6 @@ class Validator {
                 if($this->password !== $value) $this->error = "<b>confirm password</b> and <b>password</b> are not the same"; 
             }
         }
-        // if(in_array('required', $req)) {
-        //     if(strlen($value) < 1) $this->error = "$name required";
-        // }
-        // if(strpos('min:')) {
-        //     $this->error = "$name min required";
-        // }
     }
 }
 
