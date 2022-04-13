@@ -10,8 +10,9 @@
 
 2. **Functionality**  
    *DB class* - connects to database and get/input/edit/delete data.
+   
 | Action        | Using                                            | return  |
-| ------------- |:------------------------------------------------:| -------:|
+| ------------- | ------------------------------------------------ |:-------:|
 | get data      | $db->from($table)->where($column, $row)->get();  | object  |
 | create data   | $db->from($table)->insert($data)->set();         |         |
 | edit data     | $db->from($table)->update($data);                |         |
@@ -26,7 +27,7 @@ $data = (object);
 
    *User class* - get/create/edit/delete user from database.
 | Action        | Using                   | return  |
-| ------------- |:-----------------------:| -------:|
+| ------------- | ----------------------- |:-------:|
 | get user      | $user->get($data);      | object  |
 | create user   | $user->create($data);   |         |
 | edit user     | $user->edit($data);     |         |
@@ -39,7 +40,7 @@ $email = 'email_name';
 
   *Auth class* - user authentication.
 | Action        | Using                 | return  |
-| ------------- |:---------------------:| -------:|
+| ------------- | --------------------- |:-------:|
 | get auth user | Auth::user();         | object  |
 | login user    | Auth::login($data);   |         |
 | logout user   | Auth::logout();       |         |  
@@ -49,7 +50,7 @@ $data = (object);
 
 *Validator* - validate data.
 | Action         | Using                                 | return  |
-| -------------- |:-------------------------------------:| -------:|
+| -------------- | ------------------------------------- |:-------:|
 | set validation | $validator = new Validator($props);   |         |
 | validate data  | $validator->validate($data);          |         |  
 ```php
@@ -59,7 +60,7 @@ $data = (object);
 
 *Session* - controlls session.
 | Action              | Using                           | return  |
-| ------------------- |:-------------------------------:| -------:|
+| ------------------- | ------------------------------- |:-------:|
 | start session       | Session::start();               |         |
 | check session       | Session::isAuth($location);     |         |  
 | check session       | Session::isNotAuth($location);  |         |  
