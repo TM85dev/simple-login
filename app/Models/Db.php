@@ -9,7 +9,7 @@ class DB {
     use TraitRes;
 
     protected $conn;
-    protected $row = '';
+    protected $col = '';
     protected $name = '';
     protected $table = '';
     protected $data;
@@ -34,17 +34,17 @@ class DB {
         $this->table = $table;
         return $this;
     }
-    public function where(string $row, string $name) {
-        $this->row = $row;
+    public function where(string $col, string $name) {
+        $this->col = $col;
         $this->name = $name;
-        $sql = "SELECT * FROM $this->table WHERE $row=:$row";
+        $sql = "SELECT * FROM $this->table WHERE $col=:$col";
         $this->conn = $this->conn->prepare($sql);
         return $this;
     }
     public function get() {
         $name = htmlspecialchars($this->name);
         $prepare = $this->conn;
-        $prepare->bindParam(":$this->row", $this->name);
+        $prepare->bindParam(":$this->col", $this->name);
         $prepare->execute();
         return $prepare->fetch(PDO::FETCH_OBJ);
     }
@@ -79,7 +79,7 @@ class DB {
         $this->conn = $this->conn->prepare($sql);
         $this->set();
     }
-    public function delete($request) {
+    public function delete(object $request) {
         $this->data = $request;
         $condition = '';
         $i = 0;
