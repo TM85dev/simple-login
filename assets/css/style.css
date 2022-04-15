@@ -373,4 +373,11 @@ body {
 .close:hover {
   color: red;
 }
+
+form button:disabled {
+  background: #8080807d !important;
+  cursor: default;
+  color: lightgrey;
+  border: 0;
+}
 /*# sourceMappingURL=style.css.map */

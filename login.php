@@ -1,21 +1,4 @@
-<?php 
-    include 'includes/autoloader.php';
 
-    use app\Models\Session;
-    use app\Controllers\AuthController;
-
-    Session::start();
-    Session::isAuth('index.php');
-    $api = new AuthController;
-    
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $request = (object) [
-            'email' => $_POST['email'],
-            'password' => $_POST['password']
-        ];
-        $api->login($request);
-    }
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,17 +16,10 @@
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
 
-            <?php if( $api->error() ): ?>
-                <div class="error">
-                    <p><?=$api->error(); ?></p>
-                </div>
-            <?php elseif( $api->response() ): ?>
-                <div class="success">
-                    <p><?=$api->response(); ?></p>
-                </div>
-            <?php endif; ?>
+
 
     </form>
-    <?php Session::remove(['action_info', 'action_error']); ?>
+
+    <script src="assets/js/login.js"></script>
 </body>
 </html>

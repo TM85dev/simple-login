@@ -191,3 +191,9 @@ body {
     }
 }
 
+form button:disabled {
+    background: #8080807d!important;
+    cursor: default;
+    color: lightgrey;
+    border: 0;
+}

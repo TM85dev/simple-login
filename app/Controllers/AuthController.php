@@ -28,9 +28,7 @@ class AuthController {
             if($auth->error) {
                 $this->error = $auth->error;
             } else {
-                $_SESSION['action_info'] = 'Successfully login';
-                header('Location: ./index.php');
-                exit;
+                $this->res = 'Successfully login';
             }
         }
     }
