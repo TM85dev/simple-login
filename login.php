@@ -1,3 +1,11 @@
+<?php
+    include 'includes/autoloader.php';
+    
+    use app\Models\Session;
+    Session::start();
+    Session::isAuth('index.php');
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,11 +23,8 @@
         <input type="password" name="password" placeholder="password"><br>
         <button type="submit">Login</button>
         <a href="./register.php" class="register-link">Register</a>
-
-
-
     </form>
 
-    <script src="assets/js/login.js"></script>
+    <script type="module" src="assets/js/login.js"></script>
 </body>
 </html>

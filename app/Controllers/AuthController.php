@@ -22,13 +22,13 @@ class AuthController {
         ];
         $validator->validate($data);
         if($validator->error()) {
-            $this->error = $validator->error();
+            $this->error = ['error' => $validator->error()];
         } else {
             $auth = Auth::login($data);
-            if($auth->error) {
-                $this->error = $auth->error;
+            if(!$auth) {
+                $this->error = ['error' => 'Invalid data'];
             } else {
-                $this->res = 'Successfully login';
+                $this->res = ['msg' => 'Successfylly login'];
             }
         }
     }

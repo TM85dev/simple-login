@@ -5,7 +5,7 @@
     use app\Models\Session;
     use app\Controllers\AuthController;
     
-    // if($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Content-Type: application/json');
 
         Session::start();
@@ -21,5 +21,5 @@
         $res = $api->error() ? $api->error() : $api->response();
         
         echo json_encode($res);
-    // }
+    }
 ?>

@@ -6,8 +6,6 @@ use app\Models\User;
 use app\Models\Session;
 use app\Traits\TraitRes;
 
-// include_once 'includes/autoloader.php';
-
 class Auth {
     use TraitRes;
 
@@ -32,10 +30,9 @@ class Auth {
             unset($user->password);
             $_SESSION['u_id'] = $user->id.'|'.uniqid();
             $_SESSION['auth'] = $user;
+            return true;
         } else {
-            return (object) [
-                'error' => 'Invalid password'
-            ];
+            return false;
         }
     }
     public static function logout() {
