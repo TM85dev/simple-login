@@ -19,7 +19,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
     <div class="welcome-header">
@@ -70,6 +70,6 @@
         </form>
     </div>
     <?php Session::remove(['action_info', 'action_error', 'delete_error']); ?>
-    <script src="assets/js/script.js"></script>
+    <script type="module" src="public/js/script.js"></script>
 </body>
 </html>

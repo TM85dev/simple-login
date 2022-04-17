@@ -1,0 +1,272 @@
+body {
+  min-height: 100vh;
+  background-image: linear-gradient(to right top, #ad6bd1, #a06bd8, #906bde, #7c6ce5, #636deb, #4d7cf4, #3289fb, #0096ff, #00afff, #00c6ff, #00dbff, #5feefb);
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.register,
+.login,
+.edit-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+.register form,
+.login form,
+.edit-form form {
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 4px 2px 20px 1px lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  padding: 20px 30px 50px;
+  min-width: 300px;
+  margin-top: -10%;
+}
+.register form .title,
+.login form .title,
+.edit-form form .title {
+  background: rgba(255, 255, 255, 0.3607843137);
+  width: 100%;
+  margin: -20px -30px 50px -30px;
+  border-radius: 4px;
+  text-align: center;
+  padding: 16px 30px;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8392156863);
+  font-weight: 100;
+  box-shadow: 0 4px 4px 0 rgba(255, 255, 255, 0.2784313725);
+}
+.register form input,
+.login form input,
+.edit-form form input {
+  background: rgba(38, 95, 174, 0.2117647059);
+  color: white;
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px 14px;
+  outline: none;
+}
+.register form input::placeholder,
+.login form input::placeholder,
+.edit-form form input::placeholder {
+  color: rgba(213, 153, 250, 0.8705882353);
+  text-transform: uppercase;
+}
+.register form button,
+.login form button,
+.edit-form form button {
+  font-size: 1.1em;
+  padding: 10px 60px;
+  margin: 30px 0 0;
+  border: 0;
+  color: white;
+  background: rgba(62, 131, 248, 0.8196078431);
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.register form button:hover,
+.login form button:hover,
+.edit-form form button:hover {
+  background: rgb(3, 118, 212);
+}
+.register form .error,
+.login form .error,
+.edit-form form .error {
+  background: #9600ff;
+  box-shadow: 0 0 4px 4px #9600ff;
+}
+.register form .success,
+.login form .success,
+.edit-form form .success {
+  background: #00b4ff;
+  box-shadow: 0 0 4px 4px #00b4ff;
+}
+.register form .error,
+.register form .success,
+.login form .error,
+.login form .success,
+.edit-form form .error,
+.edit-form form .success {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: -20px;
+  border-radius: 4px;
+}
+.register form .error p,
+.register form .success p,
+.login form .error p,
+.login form .success p,
+.edit-form form .error p,
+.edit-form form .success p {
+  color: white;
+  text-align: center;
+  font-size: 1.1em;
+  margin: 10px 0;
+}
+
+.register-link,
+.login-link {
+  margin-top: 16px;
+  color: #f2f2f2;
+  text-decoration: none;
+}
+
+.welcome-header {
+  font-size: 1.4rem;
+  background: rgba(255, 255, 255, 0.8117647059);
+  margin: 0;
+  padding: 0 20px;
+  box-shadow: 0 4px 5px rgba(139, 139, 139, 0.6392156863);
+  line-height: 3rem;
+  display: Flex;
+  justify-content: space-between;
+}
+.welcome-header > div:last-of-type {
+  display: flex;
+}
+.welcome-header .left-menu-actions {
+  position: relative;
+}
+
+.delete-btn {
+  font-size: 0.76em;
+  padding: 5px 40px;
+  margin: 10px;
+  border: 0;
+  color: white;
+  background: #e91e63;
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  box-shadow: inset 0px 0px 6px 0 #a56bd6;
+}
+.delete-btn:hover {
+  background: #d50d51;
+}
+
+.logout-btn {
+  font-size: 0.76em;
+  padding: 5px 40px;
+  margin: 0 10px;
+  border: 0;
+  color: white;
+  background: #a46bd6;
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+.logout-btn:hover {
+  background: #8c51c0;
+}
+
+.toggle-delete {
+  position: absolute;
+  display: none;
+  align-items: center;
+  top: 110%;
+  right: 0px;
+  background: rgba(255, 255, 255, 0.6196078431);
+  padding: 20px 20px 10px;
+  box-shadow: 4px 2px 20px 1px lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 6px;
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+.toggle-delete .delete-btn {
+  font-size: 0.76em;
+  padding: 5px 30px;
+  margin: 10px;
+  border: 0;
+  color: white;
+  background: #e91e63;
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+  box-shadow: inset 0px 0px 6px 0 #a56bd6;
+}
+.toggle-delete .delete-btn:hover {
+  background: #d50d51;
+}
+.toggle-delete input {
+  background: rgba(38, 95, 174, 0.2117647059);
+  color: white;
+  box-shadow: inset 0px 0px 6px 0 #2b65ba;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  padding: 10px 14px;
+  outline: none;
+}
+.toggle-delete input::placeholder {
+  color: rgba(255, 255, 255, 0.8705882353);
+  text-transform: uppercase;
+}
+.toggle-delete.show {
+  opacity: 1;
+  display: flex;
+  flex-wrap: wrap;
+}
+.toggle-delete .password-row {
+  display: flex;
+  align-items: center;
+}
+.toggle-delete .password-row input {
+  -webkit-text-security: disc;
+}
+.toggle-delete .error {
+  box-shadow: 0 0 4px 4px #9600ff;
+  background: #9600ff;
+  width: 100%;
+  margin-top: 18px;
+  border-radius: 4px;
+}
+.toggle-delete .error > p {
+  margin: 8px 0;
+  font-size: 0.76em;
+  color: white;
+  text-align: center;
+  line-height: 0.9em;
+}
+
+.success-login {
+  font-size: 0.8em;
+  color: #1fbd6e;
+  font-weight: 600;
+}
+
+.close {
+  position: absolute;
+  top: -12px;
+  right: 13px;
+  color: black;
+  cursor: pointer;
+  font-family: cursive;
+  transition: color 0.2s;
+}
+.close:hover {
+  color: red;
+}
+
+form button:disabled {
+  background: rgba(128, 128, 128, 0.4901960784) !important;
+  cursor: default;
+  color: lightgrey;
+  border: 0;
+}
