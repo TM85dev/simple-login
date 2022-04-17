@@ -1,4 +1,5 @@
 node_modules
+public
 assets/css/*.css
 assets/css/*.map
 
