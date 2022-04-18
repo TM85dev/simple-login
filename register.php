@@ -2,23 +2,10 @@
     include 'includes/autoloader.php';
 
     use app\Models\Session;
-    use app\Controllers\UserController;
 
     Session::start();
     Session::isAuth('index.php');
 
-    $api = new UserController();
-
-    if($_SERVER['REQUEST_METHOD'] == 'POST') {
-        $request = (object) [
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'confirm_password' => $_POST['confirm_password']
-        ];
-
-        $api->register($request);
-    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +17,7 @@
     <title>Register</title>
 </head>
 <body class="register">
-    <form action="<?=$_SERVER['PHP_SELF']?>" method="POST">
+    <form>
         <h2 class="title">Register</h2>
         <input type="text" name="name" autocomplete="off" placeholder="name"><br/>
         <input type="email" name="email" placeholder="email"><br/>
@@ -38,15 +25,7 @@
         <input type="password" name="confirm_password" placeholder="confirm password">
         <button type="submit">Register</button>
         <a href="./login.php" class="login-link">Login</a>
-        <?php if( $api->error() ): ?>
-            <div class="error">
-                <p><?=$api->error(); ?></p>
-            </div>
-        <?php elseif( $api->response() ): ?>
-            <div class="success">
-                <p><?=$api->response(); ?></p>
-            </div>
-        <?php endif; ?>
     </form>
+    <script src="public/js/register.js"></script>
 </body>
 </html>

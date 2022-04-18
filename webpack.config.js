@@ -5,6 +5,7 @@ module.exports = {
     devtool: 'source-map',
     entry: {
         login: path.resolve(__dirname, 'assets/ts/login.ts'),
+        register: path.resolve(__dirname, 'assets/ts/register.ts'),
         script: path.resolve(__dirname, 'assets/ts/script.ts'),
     },
     mode: 'development',

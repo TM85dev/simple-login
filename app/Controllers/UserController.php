@@ -27,15 +27,15 @@ class UserController {
         ];
         $validator->validate($data);
         if($validator->error()) {
-            $this->error = $validator->error();
+            $this->error = ['error' => $validator->error()];
         } else {
             $user = new User;
             unset($data->confirm_password);
             $user->create($data);
             if($user->error()) {
-                $this->error = $$user->error();
+                $this->error = ['error' => $$user->error()];
             } else {
-                $this->res = $user->response();
+                $this->res = ['msg' => $user->response()];
             }
         }
     }

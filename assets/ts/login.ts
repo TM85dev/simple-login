@@ -6,8 +6,6 @@ const loginBtn = getEl('form button');
 const form = getEl('form');
 
 loginBtn.addEventListener('click', async (e) => {
-    console.log(e);
-    
     e.preventDefault();
     const emailInput= getInput('email');
     const passwordInput = getInput('password');
