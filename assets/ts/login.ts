@@ -28,6 +28,7 @@ loginBtn.addEventListener('click', async (e) => {
     let infoEl:HTMLElement;
     if(response.error) {
         infoEl = createEl('div', 'error', `<p>${response.error}</p>`);
+        loginBtn.removeAttribute('disabled');
     } else {
         infoEl = createEl('div', 'success', `<p>${response.msg}</p>`);
         setTimeout(() => window.location.reload() , 1000);
