@@ -1,3 +1,4 @@
+import '../scss/style.scss';
 import { getEl } from './functions';
 
 const deleteForm = getEl('.toggle-delete');

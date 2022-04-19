@@ -1,4 +1,3 @@
-import '../scss/style.scss';
 import { getEl, getInput, createEl } from './functions';
 import { ILogin, ResData } from './types/interfaces';
 
