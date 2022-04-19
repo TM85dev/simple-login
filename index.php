@@ -9,7 +9,6 @@
     Session::isNotAuth('login.php');
 
     $auth = Auth::user();
-    $api = new AuthController;
     
 ?>
 <!DOCTYPE html>
@@ -18,7 +17,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sign</title>
     <link rel="stylesheet" href="./public/css/style.css">
 </head>
 <body>
@@ -26,9 +25,6 @@
         <div>
             Welcome <b><?=$auth->name; ?></b>
         </div>
-        <?php if( $api->response() ): ?>
-            <div class="success-login"><?=$api->response(); ?></div>
-        <?php endif; ?>
         <div class="left-menu-actions">
             <button id="toggleDelete" class="delete-btn">Delete</button>
             <form class="toggle-delete" action="routes/users/delete.php" method="POST">
@@ -38,13 +34,8 @@
                     <input type="text" name="confirm_password" placeholder="confirm password" autocomplete="off">
                     <button class="delete-btn" type="submit">Delete</button>
                 </div>
-                <?php if( isset($_SESSION['delete_error']) ): ?>
-                    <div class="error">
-                        <p><?=$_SESSION['delete_error']; ?></p>
-                    </div>
-                <?php endif; ?>
             </form>
-            <form action="./logout.php" method="POST">
+            <form class="logout-form">
                 <button class="logout-btn" type="submit">Logout</button>
             </form>
         </div>
@@ -58,18 +49,8 @@
             <input type="text" name="old_password" placeholder="old password"><br/>
             <input type="text" name="new_password" placeholder="new password">
             <button type="submit">Edit</button>
-            <?php if( isset($_SESSION['action_error']) ): ?>
-                <div class="error">
-                    <p><?=$_SESSION['action_error'] ?></p>
-                </div>
-            <?php elseif( isset($_SESSION['action_info']) ): ?>
-                <div class="success">
-                    <p><?=$_SESSION['action_info']; ?></p>
-                </div>
-            <?php endif; ?>
         </form>
     </div>
-    <?php Session::remove(['action_info', 'action_error', 'delete_error']); ?>
     <script type="module" src="public/js/script.js"></script>
 </body>
 </html>

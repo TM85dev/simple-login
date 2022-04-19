@@ -33,8 +33,12 @@ class AuthController {
         }
     }
     public function logout() {
-        Auth::logout();
-        $_SESSION['action_info'] = 'Successfully logout';
-        header('Location: ./login.php');
+        $auth = Auth::logout();
+        if($auth) {
+            $this->res = ['msg' => 'Successfully logout'];
+        } else {
+            $this->error = ['error' => 'Can\'t logout. User not logged in'];
+        }
+        
     }
 }

@@ -36,9 +36,13 @@ class Auth {
         }
     }
     public static function logout() {
-        Session::remove([
-            'u_id', 'auth'
-        ]);
+        Session::start();
+        if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
+            Session::stop();
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 

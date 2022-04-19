@@ -1,8 +1,8 @@
-import { getEl, getInput, createEl } from './functions';
+import { getEl, getInput, createEl, displayResponse, getForm, getBtn } from './functions';
 import { ILogin, ResData } from './types/interfaces';
 
-const loginBtn = getEl('form button');
-const form = getEl('form');
+const loginBtn = getBtn('form button');
+const form = getForm('form');
 
 loginBtn.addEventListener('click', async (e) => {
     e.preventDefault();
@@ -22,17 +22,6 @@ loginBtn.addEventListener('click', async (e) => {
     }).then(res => res.json())
     .then((data:Response) => data);
 
-    if(getEl('.error')) getEl('.error').remove();
-    if(getEl('.success')) getEl('.success').remove();
-
-    let infoEl:HTMLElement;
-    if(response.error) {
-        infoEl = createEl('div', 'error', `<p>${response.error}</p>`);
-        loginBtn.removeAttribute('disabled');
-    } else {
-        infoEl = createEl('div', 'success', `<p>${response.msg}</p>`);
-        setTimeout(() => window.location.reload() , 1000);
-    }
-    form.appendChild(infoEl);
+    displayResponse(response, form, loginBtn);
 })
 

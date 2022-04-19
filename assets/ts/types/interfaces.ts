@@ -14,6 +14,14 @@ export interface IEl {
     (el:string): HTMLElement
 }
 
+export interface IForm {
+    (form:string): HTMLFormElement
+}
+
+export interface IBtn {
+    (btn:string): HTMLButtonElement
+}
+
 export interface IInput {
     (name:string): HTMLInputElement
 }
@@ -25,4 +33,8 @@ export interface IElCreate {
 export interface ResData extends Response {
     error?: string,
     msg?: string
+}
+
+export interface IDisplayResponse {
+    (response:ResData, form:HTMLFormElement, btn:HTMLButtonElement): void
 }
