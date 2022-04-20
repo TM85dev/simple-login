@@ -30,11 +30,20 @@ export interface IElCreate {
     (elementName:string, className:string, htmlText:string): HTMLElement
 }
 
-export interface ResData extends Response {
+export interface ResData {
     error?: string,
     msg?: string
 }
 
 export interface IDisplayResponse {
     (response:ResData, form:HTMLFormElement, btn:HTMLButtonElement): void
+}
+
+export interface IConfig {
+    method: string,
+    body?: FormData
+}
+
+export interface IAsyncData {
+    (url:string, config?:IConfig): Promise<ResData>
 }

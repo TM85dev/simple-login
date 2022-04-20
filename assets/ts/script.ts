@@ -1,6 +1,6 @@
 import '../scss/style.scss';
-import { displayResponse, getEl, getForm, getBtn } from './functions';
-import { ResData } from './types/interfaces';
+import { displayResponse, getEl, getForm, getBtn, asyncData } from './functions';
+import { IConfig } from './types/interfaces';
 
 const deleteForm = getEl('.toggle-delete');
 const logoutForm = getForm('form.logout-form');
@@ -20,10 +20,10 @@ closeBtn.addEventListener('click', () => {
 logoutBtn.addEventListener('click', async e => {
     e.preventDefault();
 
-    const response:ResData = await fetch('http://localhost/sign/routes/auth/logout.php', {
-        method: 'POST',
-    }).then(res => res.json())
-    .then((data:Response) => data)
+    const config:IConfig = {
+        method: 'POST'
+    }
+    const response = await asyncData('http://localhost/sign/routes/auth/logout.php', config)
     
     displayResponse(response, editForm, logoutBtn);
 })

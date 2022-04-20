@@ -1,10 +1,10 @@
-import { getEl, getInput, createEl, displayResponse, getForm, getBtn } from './functions';
-import { ILogin, ResData } from './types/interfaces';
+import { getInput, displayResponse, getForm, getBtn, asyncData } from './functions';
+import { IConfig, ILogin } from './types/interfaces';
 
 const loginBtn = getBtn('form button');
 const form = getForm('form');
 
-loginBtn.addEventListener('click', async (e) => {
+loginBtn.addEventListener('click', async e => {
     e.preventDefault();
     const emailInput= getInput('email');
     const passwordInput = getInput('password');
@@ -16,11 +16,12 @@ loginBtn.addEventListener('click', async (e) => {
     data.append('email', payload.email);
     data.append('password', payload.password);
     loginBtn.setAttribute('disabled', 'true');
-    const response:ResData = await fetch('http://localhost/sign/routes/auth/login.php', {
+
+    const config:IConfig = {
         method: 'POST',
         body: data
-    }).then(res => res.json())
-    .then((data:Response) => data);
+    }
+    const response = await asyncData('http://localhost/sign/routes/auth/login.php', config);
 
     displayResponse(response, form, loginBtn);
 })

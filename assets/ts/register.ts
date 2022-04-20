@@ -1,5 +1,5 @@
-import { getEl, createEl, getInput, displayResponse, getForm, getBtn } from './functions'
-import { IRegister, ResData } from './types/interfaces'
+import { getInput, displayResponse, getForm, getBtn, asyncData } from './functions'
+import { IConfig, IRegister } from './types/interfaces'
 
 const registerBtn = getBtn('form button')
 const form = getForm('form')
@@ -17,12 +17,18 @@ registerBtn.addEventListener('click', async e => {
     data.append('email', payload.email)
     data.append('password', payload.password)
     data.append('confirm_password', payload.confirm_password)
-    
-    const response:ResData = await fetch('http://localhost/sign/routes/users/create.php', {
+
+    const config:IConfig = {
         method: 'POST',
         body: data
-    }).then(res => res.json())
-    .then((data:Response) => data)
+    }
+    
+    const response = await asyncData('http://localhost/sign/routes/users/create.php', config);
+    // const response:ResData = await fetch('http://localhost/sign/routes/users/create.php', {
+    //     method: 'POST',
+    //     body: data
+    // }).then(res => res.json())
+    // .then((data:Response) => data)
     
     displayResponse(response, form, registerBtn);
 })

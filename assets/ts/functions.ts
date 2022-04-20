@@ -1,4 +1,4 @@
-import { IEl, IInput, IElCreate, IDisplayResponse, IForm, IBtn } from './types/interfaces'
+import { IEl, IInput, IElCreate, IDisplayResponse, IForm, IBtn, IAsyncData, ResData } from './types/interfaces'
 
 
 export const getEl:IEl = el => <HTMLElement>document.querySelector(el);
@@ -30,4 +30,12 @@ export const displayResponse:IDisplayResponse = (response, form, btn) => {
         setTimeout(() => window.location.reload() , 1000);
     }
     form.appendChild(infoEl);
+}
+
+export const asyncData:IAsyncData = async (url, config) => {
+    const promiseData = await fetch(url, config);
+    
+    const response:ResData = await promiseData.json();
+
+    return response;
 }
