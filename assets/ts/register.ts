@@ -1,8 +1,8 @@
-import { getEl, createEl, getInput } from './functions'
+import { getEl, createEl, getInput, displayResponse, getForm, getBtn } from './functions'
 import { IRegister, ResData } from './types/interfaces'
 
-const registerBtn = getEl('form button')
-const form = getEl('form')
+const registerBtn = getBtn('form button')
+const form = getForm('form')
 
 registerBtn.addEventListener('click', async e => {
     e.preventDefault()
@@ -24,17 +24,6 @@ registerBtn.addEventListener('click', async e => {
     }).then(res => res.json())
     .then((data:Response) => data)
     
-    if(getEl('.error')) getEl('.error').remove();
-    if(getEl('.success')) getEl('.success').remove();
-
-    let infoEl:HTMLElement;
-    if(response.error) {
-        infoEl = createEl('div', 'error', `<p>${response.error}</p>`);
-    } else {
-        infoEl = createEl('div', 'success', `<p>${response.msg}</p>`);
-        setTimeout(() => window.location.reload() , 1000);
-    }
-    form.appendChild(infoEl);
-    
+    displayResponse(response, form, registerBtn);
 })
 
