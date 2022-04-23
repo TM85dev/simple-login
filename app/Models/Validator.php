@@ -4,6 +4,7 @@ namespace app\Models;
 
 use app\Models\Auth;
 use app\Traits\TraitRes;
+use app\Models\DB;
 
 class Validator {
     use TraitRes;
@@ -14,7 +15,7 @@ class Validator {
 
     public function __construct(object $obj) {
         $this->data = $obj;
-        if(isset($obj->password) && isset($obj->confirm_password)) $this->comparing_passwords = true;
+        // if(isset($obj->password) && isset($obj->confirm_password)) $this->comparing_passwords = true;
     }
 
     public function validate(object $obj) {
@@ -25,6 +26,7 @@ class Validator {
         }
     }
     private function check(string $value, string $name, string $requirements) {
+        $this->comparing_passwords = (stripos( $requirements, 'password') !== false && stripos( $requirements, 'confirm_password' )) !== false || stripos( $requirements, 'is_hashed' ) !== false ? true : false;
         $reqs = explode('|', $requirements);
         foreach ($reqs as $req) {
             if($req === 'required') {
@@ -52,7 +54,15 @@ class Validator {
             }
             if($req === 'confirm_password') {
                 if(!$this->password) $this->error = "<b>password</b> is required";
-                if($this->password !== $value) $this->error = "<b>confirm password</b> and <b>password</b> are not the same"; 
+                if($this->password != $value) $this->error = "<b>confirm password</b> and <b>password</b> are not the same"; 
+            }
+            if(stripos($req, 'unique') !== false) {
+                $arr = explode('_', $req);
+                $unique = $arr[0];
+                $table_name = $arr[1];
+                $db = new DB;
+                $data = $db->from($table_name)->where($name, $value)->get();
+                if($data) $this->error = "<b>$name</b> has taken.";
             }
         }
     }

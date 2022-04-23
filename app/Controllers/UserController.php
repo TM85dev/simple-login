@@ -15,7 +15,7 @@ class UserController {
     public function register(object $request) {
         $validator = new Validator((object) [
             'name' => 'required|min:3',
-            'email' => 'required|email',
+            'email' => 'required|email|unique_users',
             'password' => 'required|password|min:6',
             'confirm_password' => 'required|confirm_password'
         ]);
@@ -72,18 +72,20 @@ class UserController {
         $validator = new Validator((object) [
             'name' => 'required|min:3',
             'email' => 'required|email',
-            'password' => 'required|password',
-            'confirm_password' => 'required|confirm_password'
+            'password' => 'required|password|is_hashed',
+            'confirm_password' => 'required|confirm_password|password',
+            'new_password' => 'required|password'
         ]);
         $data = (object) [
             'name' => $request->new_name,
             'email' => $request->new_email,
             'password' => $password,
-            'confirm_password' => md5($request->old_password)
+            'confirm_password' => md5($request->old_password),
+            'new_password' => $request->new_password
         ];
         $validator->validate($data);
         if($validator->error()) {
-            $_SESSION['action_error'] = $validator->error();
+            $this->error = ['error' => $validator->error()];
         } else {
             $data = (object) [
                 'old_email' => $request->old_email,
@@ -92,9 +94,9 @@ class UserController {
                 'new_password' => $request->new_password
             ];
             $user->edit($data);
-            $_SESSION['action_info'] = 'User data updated';
             $_SESSION['auth']->name = $request->new_name;
             $_SESSION['auth']->email = $request->new_email;
+            $this->res = ['msg' => 'User data updated'];
         }
         // $user = new User;
         // $data = (object) ['email' => $request->old_email];
@@ -108,8 +110,7 @@ class UserController {
         //     $_SESSION['action_info'] = $user->response();
         //     $user->edit($request);
         // }
-        header('Location: /sign/');
-        exit;
+        // exit;
     }
 
 }
