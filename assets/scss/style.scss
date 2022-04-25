@@ -197,3 +197,7 @@ form button:disabled {
     color: lightgrey;
     border: 0;
 }
+
+.password-input {
+    -webkit-text-security: disc;
+}

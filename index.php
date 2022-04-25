@@ -41,14 +41,14 @@
         </div>
     </div>
     <div class="edit-form">
-        <form action="routes/users/edit.php" method="POST">
+        <form>
             <div class="title">Edit profile</div>
             <input type="hidden" name="_method" value="PUT">
             <input type="text" name="name" value="<?=$auth->name?>" placeholder="name"><br/>
             <input type="email" name="email" value="<?=$auth->email?>" placeholder="email"><br/>
-            <input type="text" name="old_password" placeholder="old password"><br/>
-            <input type="text" name="new_password" placeholder="new password">
-            <button type="submit">Edit</button>
+            <input class="password-input" type="text" name="old_password" placeholder="old password" autocomplete="off"><br/>
+            <input class="password-input" type="text" name="new_password" placeholder="new password" autocomplete="off">
+            <button class="edit-btn">Edit</button>
         </form>
     </div>
     <script type="module" src="public/js/script.js"></script>

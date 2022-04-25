@@ -21,5 +21,4 @@ if($_SERVER['REQUEST_METHOD'] == 'POST') {
     $res = $api->error() ? $api->error() : $api->response();
 
     echo json_encode($res);
-    // echo json_encode($request);
 }

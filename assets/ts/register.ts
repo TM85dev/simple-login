@@ -13,10 +13,7 @@ registerBtn.addEventListener('click', async e => {
         confirm_password: getInput('confirm_password').value
     }
     let data = new FormData()
-    data.append('name', payload.name)
-    data.append('email', payload.email)
-    data.append('password', payload.password)
-    data.append('confirm_password', payload.confirm_password)
+    Object.keys(payload).forEach(name => data.append(name, payload[name]));
 
     const config:IConfig = {
         method: 'POST',
@@ -24,11 +21,6 @@ registerBtn.addEventListener('click', async e => {
     }
     
     const response = await asyncData('http://localhost/sign/routes/users/create.php', config);
-    // const response:ResData = await fetch('http://localhost/sign/routes/users/create.php', {
-    //     method: 'POST',
-    //     body: data
-    // }).then(res => res.json())
-    // .then((data:Response) => data)
     
     displayResponse(response, form, registerBtn);
 })

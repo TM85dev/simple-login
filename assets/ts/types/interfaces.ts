@@ -4,10 +4,19 @@ export interface ILogin {
 }
 
 export interface IRegister {
+    [key: string]: string,
     name: string,
     email: string,
     password: string,
     confirm_password: string
+}
+
+export interface IEdit {
+    [key:string]: string,
+    old_password: string,
+    new_name: string,
+    new_email: string,
+    new_password: string
 }
 
 export interface IEl {
@@ -45,5 +54,5 @@ export interface IConfig {
 }
 
 export interface IAsyncData {
-    (url:string, config?:IConfig): Promise<ResData>
+    (url:string, config?: object): Promise<ResData>
 }
