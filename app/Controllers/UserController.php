@@ -44,7 +44,7 @@ class UserController {
         $user = new User;
         $password = $user->get($auth)->password;
         $validator = new Validator((object) [
-            'password' => 'required|password',
+            'password' => 'required|password|is_hashed',
             'confirm_password' => 'required|confirm_password'
         ]);
         $data = (object) [
@@ -53,14 +53,13 @@ class UserController {
         ];
         $validator->validate($data);
         if($validator->error()) {
-            $_SESSION['delete_error'] = $validator->error();
+            $this->error = ['error' => $validator->error()];
         } 
         else {
-            Auth::logout($user);
             $user->remove($request->email);
-            $_SESSION['action_info'] = "User was removed";
+            Auth::logout($user);
+            $this->res = ['msg' => 'User was removed'];
         }
-        header('Location: /sign/');
         
     }
     public function edit(object $request) {

@@ -19,6 +19,10 @@ export interface IEdit {
     new_password: string
 }
 
+export interface IDelete {
+    confirm_password: string
+}
+
 export interface IEl {
     (el:string): HTMLElement
 }
@@ -50,7 +54,7 @@ export interface IDisplayResponse {
 
 export interface IConfig {
     method: string,
-    body?: FormData
+    body?: string
 }
 
 export interface IAsyncData {

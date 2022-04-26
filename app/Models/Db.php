@@ -77,12 +77,13 @@ class DB {
         }
         $sql = "UPDATE $this->table SET $sets WHERE email='$old_email'";
         $this->conn = $this->conn->prepare($sql);
-        $this->set();
+        return $this;
     }
     public function delete(object $request) {
         $this->data = $request;
         $condition = '';
         $i = 0;
+        $request = (array) $request;
         foreach ($request as $key => $value) {
             $condition .= (count($request)==$i || $i==0) ? "$key=:$key" : " AND $key=:$key ";
             $i++;

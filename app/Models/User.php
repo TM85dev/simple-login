@@ -41,11 +41,12 @@ class User {
             'email' => $request->new_email,
             'password' => $request->new_password
         ];
-        $db->from('users')->update($data);
+        $db->from('users')->update($data)->set();
     }
     public function remove(string $email) {
         $db = new DB;
-        $db->from('users')->delete(['email' => $email])->set();
+        $data = (object) ['email' => $email];
+        $db->from('users')->delete($data)->set();
     }
 }
 
