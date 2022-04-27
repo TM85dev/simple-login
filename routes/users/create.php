@@ -3,18 +3,15 @@
 include '../../includes/autoloader.php';
     
 use app\Controllers\UserController;
+use app\Models\Request;
 
 $api = new UserController();
 
 if($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Content-Type: application/json');
 
-    $request = (object) [
-        'name' => $_POST['name'],
-        'email' => $_POST['email'],
-        'password' => $_POST['password'],
-        'confirm_password' => $_POST['confirm_password']
-    ];
+    $req = new Request;
+    $request = $req->method('POST')->format();
 
     $api->register($request);
 
