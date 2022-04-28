@@ -4,18 +4,19 @@
     
     use app\Models\Session;
     use app\Controllers\AuthController;
+    use app\Models\Request;
     
+    Session::start();
+    Session::isAuth('index.php');
+
     if($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Content-Type: application/json');
 
-        Session::start();
-        Session::isAuth('index.php');
         $api = new AuthController;
     
-        $request = (object) [
-            'email' => $_POST['email'],
-            'password' => $_POST['password']
-        ];
+        $req = new Request;
+        $request = $req->method('POST')->format();
+        
         $api->login($request);
         
         $res = $api->error() ? $api->error() : $api->response();

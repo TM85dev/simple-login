@@ -4,7 +4,6 @@ export interface ILogin {
 }
 
 export interface IRegister {
-    [key: string]: string,
     name: string,
     email: string,
     password: string,
@@ -12,7 +11,6 @@ export interface IRegister {
 }
 
 export interface IEdit {
-    [key:string]: string,
     old_password: string,
     new_name: string,
     new_email: string,

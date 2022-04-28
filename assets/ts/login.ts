@@ -6,23 +6,20 @@ const form = getForm('form');
 
 loginBtn.addEventListener('click', async e => {
     e.preventDefault();
+    loginBtn.setAttribute('disabled', 'true');
+
     const emailInput= getInput('email');
     const passwordInput = getInput('password');
-    const payload:ILogin = {
+    const data:ILogin = {
         email: emailInput.value,
         password: passwordInput.value
     };
-    const data:FormData = new FormData();
-    data.append('email', payload.email);
-    data.append('password', payload.password);
-    loginBtn.setAttribute('disabled', 'true');
-
     const config:IConfig = {
         method: 'POST',
-        body: data
+        body: JSON.stringify(data)
     }
     const response = await asyncData('http://localhost/sign/routes/auth/login.php', config);
-
+    
     displayResponse(response, form, loginBtn);
 })
 
