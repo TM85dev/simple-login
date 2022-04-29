@@ -18,7 +18,7 @@ loginBtn.addEventListener('click', async e => {
         method: 'POST',
         body: JSON.stringify(data)
     }
-    const response = await asyncData('http://localhost/sign/routes/auth/login.php', config);
+    const response = await asyncData('http://localhost/sign/routes/auth/login', config);
     
     displayResponse(response, form, loginBtn);
 })

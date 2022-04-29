@@ -6,7 +6,7 @@
     use app\Controllers\AuthController;
     
     Session::start();
-    Session::isNotAuth('login.php');
+    Session::isNotAuth('login');
 
     $auth = Auth::user();
     
@@ -27,7 +27,7 @@
         </div>
         <div class="left-menu-actions">
             <button id="toggleDelete" class="delete-btn">Delete</button>
-            <form class="toggle-delete" action="routes/users/delete.php" method="POST">
+            <form class="toggle-delete" action="routes/users/delete" method="POST">
                 <div class="close">x</div>
                 <input type="hidden" name="_method" value="DELETE">
                 <div class="password-row">

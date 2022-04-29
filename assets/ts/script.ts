@@ -26,7 +26,7 @@ logoutBtn.addEventListener('click', async e => {
     const config:IConfig = {
         method: 'POST'
     }
-    const response = await asyncData('http://localhost/sign/routes/auth/logout.php', config)
+    const response = await asyncData('http://localhost/sign/routes/auth/logout', config)
     
     displayResponse(response, editForm, logoutBtn)
 })
@@ -46,7 +46,7 @@ editBtn.addEventListener('click', async e => {
         body: JSON.stringify(data)
     }
 
-    const response = await asyncData('http://localhost/sign/routes/users/update.php', config)
+    const response = await asyncData('http://localhost/sign/routes/users/update', config)
     
     displayResponse(response, editForm, editBtn)
     

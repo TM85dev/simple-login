@@ -4,7 +4,7 @@
     use app\Models\Session;
 
     Session::start();
-    Session::isAuth('index.php');
+    Session::isAuth('index');
 
 ?>
 <!DOCTYPE html>
@@ -24,7 +24,7 @@
         <input type="password" name="password" placeholder="password"><br/>
         <input type="password" name="confirm_password" placeholder="confirm password">
         <button type="submit">Register</button>
-        <a href="./login.php" class="login-link">Login</a>
+        <a href="./login" class="login-link">Login</a>
     </form>
     <script src="public/js/register.js"></script>
 </body>

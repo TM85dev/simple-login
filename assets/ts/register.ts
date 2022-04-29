@@ -18,7 +18,7 @@ registerBtn.addEventListener('click', async e => {
         body: JSON.stringify(data)
     }
     
-    const response = await asyncData('http://localhost/sign/routes/users/create.php', config);
+    const response = await asyncData('http://localhost/sign/routes/users/create', config);
     
     displayResponse(response, form, registerBtn);
 })
