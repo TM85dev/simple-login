@@ -1,7 +1,7 @@
 node_modules
 public
 
-assets/css/*.css
-assets/css/*.map
+assets/scss/*.css
+assets/scss/*.map
 
 assets/js/*.js

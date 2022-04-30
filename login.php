@@ -2,8 +2,10 @@
     include 'includes/autoloader.php';
     
     use app\Models\Session;
+    use app\Models\DB;
     Session::start();
     Session::isAuth('index');
+
 ?>
 
 

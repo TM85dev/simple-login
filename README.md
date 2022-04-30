@@ -3,26 +3,28 @@
 #### Simple login and register system
 
 1. **Info**  
-   Login and register system created with PHP (7.4 +).  
-   For manage files I use MVC architectural pattern. Every classes for this pattern are located in app folder.  
+   Login and register system created with PHP (7.4 +) and JavaScript.  
+   For back-end I use MVC architectural pattern. Every classes for this pattern are located in app folder.  
    Include files I use autoloader script.  
-   Other files like style and javascript are located in assets folder.  
+   Added some styles using sass (stored in assets/scss).  
+   For manage requests from front-end I use TypeScript.  
 
 2. **Functionality**  
    *DB class* - connects to database and get/input/edit/delete data.
    
-| Action        | Using                                            | return  |
-| ------------- | ------------------------------------------------ |:-------:|
-| get data      | $db->from($table)->where($column, $row)->get();  | object  |
-| create data   | $db->from($table)->insert($data)->set();         |         |
-| edit data     | $db->from($table)->update($data);                |         |
-| delete data   | $db->from($table)->delete($data)->set();         |         |  
+| Action        | Using                                                          | return          |
+| ------------- | -------------------------------------------------------------- |:---------------:|
+| get data      | $db->from($table_name)->where($column_name, $value)->getAll(); | array[objects]  |
+| get data      | $db->from($table_name)->where($column_name, $value)->get();    | object          |
+| create data   | $db->from($table_name)->insert($data)->set();                  |                 |
+| edit data     | $db->from($table_name)->update($data);                         |                 |
+| delete data   | $db->from($table_name)->delete($data)->set();                  |                 |  
 ```php
 $db = new DB;
-$table = 'table_name';
-$column = 'column_name';
-$row = 'row_name';
-$data = (object);
+$table_name;    // string //
+$column_name;   // string //
+$value;         // string //
+$data;          // object //
 ```
 
    *User class* - get/create/edit/delete user from database.

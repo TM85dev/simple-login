@@ -8,11 +8,12 @@ use app\Traits\TraitRes;
 class DB {
     use TraitRes;
 
-    protected $conn;
-    protected $col = '';
-    protected $name = '';
-    protected $table = '';
-    protected $data;
+    private $conn;
+    private $col = '';
+    private $name = '';
+    private $table = '';
+    private $data;
+    private $prepare; 
 
     private function conn() {
         $host = 'localhost';
@@ -41,12 +42,19 @@ class DB {
         $this->conn = $this->conn->prepare($sql);
         return $this;
     }
-    public function get() {
+    private function bindValues() {
         $name = htmlspecialchars($this->name);
-        $prepare = $this->conn;
-        $prepare->bindParam(":$this->col", $this->name);
-        $prepare->execute();
-        return $prepare->fetch(PDO::FETCH_OBJ);
+        $this->prepare = $this->conn;
+        $this->prepare->bindParam(":$this->col", $this->name);
+        $this->prepare->execute();
+    }
+    public function get() {
+        $this->bindValues();
+        return $this->prepare->fetch(PDO::FETCH_OBJ);
+    }
+    public function getAll() {
+        $this->bindValues();
+        return $this->prepare->fetchAll(PDO::FETCH_OBJ);
     }
     public function insert(object $request) {
         $this->data = $request;
