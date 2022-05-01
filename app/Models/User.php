@@ -5,8 +5,6 @@ namespace app\Models;
 use app\Models\DB;
 use app\Traits\TraitRes;
 
-// include_once 'db.php';
-
 class User {
     use TraitRes;
 
@@ -29,9 +27,8 @@ class User {
             'password' => $request->password
         ];
         $db->from('users')->insert($data)->set();
-        if(!$db->error()) {
-            $this->res = "User was created";
-        }
+        if($db->error()) $this->error = 'Unable to create user';
+        else $this->res = "User was created";
     }
     public function edit(object $request) {
         $db = new DB;
@@ -42,11 +39,15 @@ class User {
             'password' => $request->new_password
         ];
         $db->from('users')->update($data)->set();
+        if($db->error()) $this->error = 'Unable to edit user';
+        else $this->res = 'Edit user successfully';
     }
     public function remove(string $email) {
         $db = new DB;
         $data = (object) ['email' => $email];
         $db->from('users')->delete($data)->set();
+        if($db->error()) $this->error = 'Unable to delete user';
+        else $this->res = 'Delete user successfully';
     }
 }
 

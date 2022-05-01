@@ -16,28 +16,34 @@
 | ------------- | -------------------------------------------------------------- |:---------------:|
 | get data      | $db->from($table_name)->where($column_name, $value)->getAll(); | array[objects]  |
 | get data      | $db->from($table_name)->where($column_name, $value)->get();    | object          |
-| create data   | $db->from($table_name)->insert($data)->set();                  |                 |
-| edit data     | $db->from($table_name)->update($data);                         |                 |
-| delete data   | $db->from($table_name)->delete($data)->set();                  |                 |  
+| create data   | $db->from($table_name)->insert($data)->set();                  | res             |
+| edit data     | $db->from($table_name)->update($data)->set();                  | res             |
+| delete data   | $db->from($table_name)->delete($data)->set();                  | res             |  
 ```php
 $db = new DB;
-$table_name;    // string //
-$column_name;   // string //
-$value;         // string //
-$data;          // object //
-```
+$table_name;     // string //
+$column_name;    // string //
+$value;          // string //
+$data;           // object //
+/* if 'res' you can get information about request from helper methods(response, error) */
+$db->response(); // return when success //
+$db->error();    // return when error //
+```  
 
    *User class* - get/create/edit/delete user from database.
-| Action        | Using                   | return  |
-| ------------- | ----------------------- |:-------:|
-| get user      | $user->get($data);      | object  |
-| create user   | $user->create($data);   |         |
-| edit user     | $user->edit($data);     |         |
-| delete user   | $user->remove($email);  |         |  
+| Action        | Using                   |  return  |
+| ------------- | ----------------------- |:--------:|
+| get user      | $user->get($data);      | object   |
+| create user   | $user->create($data);   | res      |
+| edit user     | $user->edit($data);     | res      |
+| delete user   | $user->remove($email);  | res      |  
 ```php
-$db = new User;
-$data = (object);
-$email = 'email_name';
+$user = new User;
+$data;            // object //
+$email;           // string //
+/* if 'res' you can get information about request from helper methods(response, error) */
+$db->response(); // return when success //
+$db->error();    // return when error //
 ```
 
   *Auth class* - user authentication.

@@ -97,19 +97,6 @@ class UserController {
             $_SESSION['auth']->email = $request->new_email;
             $this->res = ['msg' => 'User data updated'];
         }
-        // $user = new User;
-        // $data = (object) ['email' => $request->old_email];
-        // $user->get($data);
-        // $user->validateEdit();
-        // if($user->error()) {
-        //     $this->error = $user->error();
-        //     $_SESSION['action_error'] = $user->error();
-        // } else {
-        //     $this->res = $user->response();
-        //     $_SESSION['action_info'] = $user->response();
-        //     $user->edit($request);
-        // }
-        // exit;
     }
 
 }

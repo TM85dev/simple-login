@@ -71,6 +71,7 @@ class DB {
             $prepare->bindParam($key, $value);
         }
         $prepare->execute();
+        $this->res = 'Success';
     }
     public function update(object $request) {
         $old_email = $request->old_email;
@@ -99,7 +100,6 @@ class DB {
         $sql = "DELETE FROM $this->table WHERE $condition";
         $this->conn = $this->conn->prepare($sql);
         return $this;
-
     }
 }
 
