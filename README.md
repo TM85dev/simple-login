@@ -50,10 +50,13 @@ $db->error();    // return when error //
 | Action        | Using                 | return  |
 | ------------- | --------------------- |:-------:|
 | get auth user | Auth::user();         | object  |
-| login user    | Auth::login($data);   |         |
-| logout user   | Auth::logout();       |         |  
+| login user    | Auth::login($data);   | res     |
+| logout user   | Auth::logout();       | res     |  
 ```php
-$data = (object);
+$data;           // object //
+/* if 'res' you can get information about request from helper methods(response, error) */
+$db->response(); // return when success //
+$db->error();    // return when error //
 ```
 
 *Validator* - validate data.
