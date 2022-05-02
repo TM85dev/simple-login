@@ -4,10 +4,8 @@ namespace app\Models;
 
 use app\Models\User;
 use app\Models\Session;
-use app\Traits\TraitRes;
 
 class Auth {
-    use TraitRes;
 
     public static function user() {
         Session::start();
@@ -30,10 +28,8 @@ class Auth {
             unset($user->password);
             $_SESSION['u_id'] = $user->id.'|'.uniqid();
             $_SESSION['auth'] = $user;
-            $this->res = 'Login successfully';
             return true;
         } else {
-            $this->error = 'Login failed';
             return false;
         }
     }
@@ -41,10 +37,8 @@ class Auth {
         Session::start();
         if(isset($_SESSION['u_id']) && isset($_SESSION['auth'])) {
             Session::stop();
-            $this->res = 'Logout successfully';
             return true;
         } else {
-            $this->error = 'Logout failed';
             return false;
         }
     }
