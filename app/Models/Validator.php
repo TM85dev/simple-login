@@ -15,7 +15,6 @@ class Validator {
 
     public function __construct(object $obj) {
         $this->data = $obj;
-        // if(isset($obj->password) && isset($obj->confirm_password)) $this->comparing_passwords = true;
     }
 
     public function validate(object $obj) {

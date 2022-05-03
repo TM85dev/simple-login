@@ -57,14 +57,46 @@ $data;           // object //
 /* if 'boolean' it return (boolean) 'true' for success or 'false' for failed action */
 ```
 
-*Validator* - validate data.
-| Action         | Using                                 | return  |
-| -------------- | ------------------------------------- |:-------:|
-| set validation | $validator = new Validator($props);   |         |
-| validate data  | $validator->validate($data);          |         |  
+*Validator class* - validate data.
+| Action           | Using                                 | return  |
+| ---------------- | ------------------------------------- |:-------:|
+| set validation   | $validator = new Validator($props);   |         |
+| validate data    | $validator->validate($data);          |         |  
+| check for error  | $validator->error();                  | string  |  
 ```php
-$props = (object);
-$data = (object);
+$props = (object) ['key' => 'type']; // object //
+/*
+'key' - name value like 'email' or 'name'
+'type' - type of value like 'required', 'password'. You can pass more than one value separating '|'
+Types you can use:
+'required' - value is required,
+'min:nr' - minimal length value is required [nr - number of length],
+'max:nr' - maximal length value is required [nr - number of length],
+'email' - value must have email syntax,
+'password' - value must have min 1 number, 1 uppercase string, 1 lowercase string, and 1 special character,
+'confirm_password' - check if passing object has password type and compare this two values ('password' value must be declared in passing object),
+'unique_table' - check if passing value is already in database. Value after '_' is the name of table in database ex. 'unique_users',
+'is_hashed' - if passing with password like 'password|is_hashed' it define that password has already hashed and will not be validated like 'password' (min values not required)
+*/
+$data = (object) ['name' => 'value'];
+/*
+'name' - name must be the same as in the $props object passed when creating new Validator,
+'value' - value for specific name. Will be cheked validation requirements.
+*/
+// Example
+$validator = new Validator((object) [
+   'name' => 'required',
+   'email' => 'unique_users|min:6|email',
+   'password' => 'password',
+   'confirm_password' => 'confirm_password'
+]);
+$validator->validate((object) [
+   'name' => 'test',
+   'email' => 'test@test.test',
+   'password' => 'Test123!',
+   'confirm_password' => 'Test123!'
+]);
+if($validator->error()) echo $validator->error();
 ```
 
 *Session* - controlls session.
