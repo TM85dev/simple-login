@@ -28,6 +28,9 @@ $data;           // object //
 /* if 'res' you can get information about request from helper methods(response, error) */
 $db->response(); // return when success //
 $db->error();    // return when error //
+// Example
+$db = new DB;
+$db->from('user')->where('email', 'test@test.test')->get();
 ```  
 
    *User class* - get/create/edit/delete user from database.
@@ -44,6 +47,13 @@ $email;           // string //
 /* if 'res' you can get information about request from helper methods(response, error) */
 $db->response(); // return when success //
 $db->error();    // return when error //
+// Example
+$user = new User;
+$user->get(
+    (object) [
+        'email' => 'test@test.test',
+    ]
+);
 ```
 
   *Auth class* - user authentication.
@@ -55,6 +65,11 @@ $db->error();    // return when error //
 ```php
 $data;           // object //
 /* if 'boolean' it return (boolean) 'true' for success or 'false' for failed action */
+// Example
+Auth::login((object) [
+   'email' => 'test@test.test',
+   'password' => 'Test123!'
+]);
 ```
 
 *Validator class* - validate data.
@@ -96,7 +111,8 @@ $validator->validate((object) [
    'password' => 'Test123!',
    'confirm_password' => 'Test123!'
 ]);
-if($validator->error()) echo $validator->error();
+if($validator->error()) // error //;
+else // do some action //;
 ```
 
 *Session* - controlls session.
@@ -112,18 +128,5 @@ $location = 'index.php';
 $data_remove = string or array;
 ```
 
-Example
-```php
-$db = new DB;
-$db->from('user')->where('email', $email)->get();
----
-$user = new User;
-$user->get(
-    (object) [
-        'email' => $email,
-    ]
-);
----
-Auth::user();
-```
+
 
