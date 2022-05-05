@@ -124,8 +124,10 @@ else // do some action //;
 | destroy session     | Session::stop();                |         |  
 | remove from session | Session::remove($data_remove);  |         |  
 ```php
-$location = 'index.php';
-$data_remove = string or array;
+$location; // string //
+$data_remove; // string | array //
+// Example
+Session::isAuth('index');
 ```
 
 
