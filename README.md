@@ -130,5 +130,28 @@ $data_remove; // string | array //
 Session::isAuth('index');
 ```
 
+*Request* - controlls incoming requests.
+| Action                | Using                                        | return  |
+| --------------------- | -------------------------------------------- |:-------:|
+| initialize Request    | $request = new Request;                      |         |
+| get data from request | $request->method($method)->format('$format); | object  |  
+```php
+$request = new Request;
+$method; // string //
+/*
+Methods: GET, POST, PUT, PATCH, DELETE
+default = GET
+*/
+$format // string //
+/*
+Formats: raw, json
+default = raw
+*/
+// Example
+$request = new Request;
+$req = $request->method('POST')->format('json');
+echo $req;
+```
+
 
 
