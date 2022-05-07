@@ -16,10 +16,10 @@ class DB {
     private $prepare; 
 
     private function conn() {
-        $host = 'localhost';
-        $db = 'sign';
-        $username = 'root';
-        $password = '';
+        $host = getenv('HOST');
+        $db = getenv('DB');
+        $username = getenv('USERNAME');
+        $password = getenv('PASSWORD');
         try {
             $conn = new PDO("mysql:host=$host;dbname=$db", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
