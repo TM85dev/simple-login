@@ -116,13 +116,13 @@ else // do some action //;
 ```
 
 *Session* - controlls session.
-| Action              | Using                           | return  |
-| ------------------- | ------------------------------- |:-------:|
-| start session       | Session::start();               |         |
-| check session       | Session::isAuth($location);     |         |  
-| check session       | Session::isNotAuth($location);  |         |  
-| destroy session     | Session::stop();                |         |  
-| remove from session | Session::remove($data_remove);  |         |  
+| Action              | Using                           |
+| ------------------- | ------------------------------- |
+| start session       | Session::start();               |
+| check session       | Session::isAuth($location);     |
+| check session       | Session::isNotAuth($location);  |
+| destroy session     | Session::stop();                |
+| remove from session | Session::remove($data_remove);  |
 ```php
 $location; // string //
 $data_remove; // string | array //
