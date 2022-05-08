@@ -1,4 +1,4 @@
-import { IEl, IInput, IElCreate, IDisplayResponse, IForm, IBtn, IAsyncData, ResData } from './types/interfaces'
+import { IEl, IInput, IElCreate, IDisplayResponse, IForm, IBtn, IAsyncData, IResData, IUser } from './types/interfaces'
 
 
 export const getEl:IEl = el => <HTMLElement>document.querySelector(el);
@@ -35,7 +35,7 @@ export const displayResponse:IDisplayResponse = (response, form, btn) => {
 export const asyncData:IAsyncData = async (url, config) => {
     const promiseData = await fetch(url, config);
     
-    const response:ResData = await promiseData.json();
+    const response:IResData = await promiseData.json();
 
     return response;
 }

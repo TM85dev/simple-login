@@ -3,6 +3,12 @@ export interface ILogin {
     password: string
 }
 
+export interface IUser {
+    id?: number,
+    name?: string,
+    email?: string
+}
+
 export interface IRegister {
     name: string,
     email: string,
@@ -41,13 +47,16 @@ export interface IElCreate {
     (elementName:string, className:string, htmlText:string): HTMLElement
 }
 
-export interface ResData {
-    error?: string,
+export class IResData implements IUser {
+    id?: number
+    name?: string
+    email?: string
+    error?: string
     msg?: string
 }
 
 export interface IDisplayResponse {
-    (response:ResData, form:HTMLFormElement, btn:HTMLButtonElement): void
+    (response:IResData, form:HTMLFormElement, btn:HTMLButtonElement): void
 }
 
 export interface IConfig {
@@ -56,5 +65,5 @@ export interface IConfig {
 }
 
 export interface IAsyncData {
-    (url:string, config?: object): Promise<ResData>
+    (url:string, config?: object): Promise<IResData>
 }

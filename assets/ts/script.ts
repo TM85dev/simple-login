@@ -1,6 +1,6 @@
 import '../scss/style.scss'
-import { displayResponse, getEl, getForm, getBtn, asyncData, getInput } from './functions'
-import { IConfig, IDelete, IEdit } from './types/interfaces'
+import { displayResponse, getForm, getBtn, asyncData, getInput, getEl } from './functions'
+import { IConfig, IDelete, IEdit, IUser } from './types/interfaces'
 
 const deleteForm = getForm('.toggle-delete')
 const editForm = getForm('.edit-form>form')
@@ -49,7 +49,6 @@ editBtn.addEventListener('click', async e => {
     const response = await asyncData('http://localhost/sign/routes/users/update', config)
     
     displayResponse(response, editForm, editBtn)
-    
 })
 
 deleteBtn.addEventListener('click', async e => {
@@ -67,5 +66,14 @@ deleteBtn.addEventListener('click', async e => {
     const response = await asyncData('http://localhost/sign/routes/users/delete', config)
 
     displayResponse(response, editForm, deleteBtn)
-    
 })
+
+const getAuthUser = async () => {
+    const user = await asyncData('http://localhost/sign/routes/users/read')
+    
+    getEl('.username').innerHTML = `Welcome <b>${user.name}</b>`
+    getInput('name').value = user.name || ''
+    getInput('email').value = user.email || ''
+}
+getAuthUser()
+

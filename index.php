@@ -2,13 +2,9 @@
     include_once 'includes/autoloader.php';
 
     use app\Models\Session;
-    use app\Models\Auth;
-    use app\Controllers\AuthController;
     
     Session::start();
     Session::isNotAuth('login');
-
-    $auth = Auth::user();
     
 ?>
 <!DOCTYPE html>
@@ -22,9 +18,7 @@
 </head>
 <body>
     <div class="welcome-header">
-        <div>
-            Welcome <b><?=$auth->name; ?></b>
-        </div>
+        <div class="username"></div>
         <div class="left-menu-actions">
             <button id="toggleDelete" class="delete-btn">Delete</button>
             <form class="toggle-delete" action="routes/users/delete" method="POST">
@@ -44,8 +38,8 @@
         <form>
             <div class="title">Edit profile</div>
             <input type="hidden" name="_method" value="PUT">
-            <input type="text" name="name" value="<?=$auth->name?>" placeholder="name"><br/>
-            <input type="email" name="email" value="<?=$auth->email?>" placeholder="email"><br/>
+            <input type="text" name="name" placeholder="name"><br/>
+            <input type="email" name="email" placeholder="email"><br/>
             <input class="password-input" type="text" name="old_password" placeholder="old password" autocomplete="off"><br/>
             <input class="password-input" type="text" name="new_password" placeholder="new password" autocomplete="off">
             <button class="edit-btn">Edit</button>
